@@ -23,7 +23,7 @@ public class LoginPage extends UIAction {
     private By inpEmail=By.xpath("//input[@id='Email']");
     private By inpPassword=By.xpath("//input[@id='password']");
     private By btnLogin=By.xpath("//button[text()='LOGIN']");
-    private By hdrLogo=By.xpath("//a[./img[contains(@alt,'Logo..')]]");
+    private By hdrLogo=By.xpath("//a[./img[contains(@alt,'Logo')]]");
 
 
     public void getURL()  {

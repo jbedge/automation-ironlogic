@@ -14,6 +14,7 @@ public interface Action {
      void clickUsingJS(By loc);
      void clickUsingAction(By loc);
      void waitForPageLoad();
+     void waitFor(double sec);
 
 
 

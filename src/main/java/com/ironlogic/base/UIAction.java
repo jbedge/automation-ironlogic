@@ -19,7 +19,7 @@ import java.time.Duration;
 
 public class UIAction implements Action {
 
-    Logger logger = LoggerFactory.getLogger(TestConfiguration.class);
+    Logger log = LoggerFactory.getLogger(UIAction.class);
     public WebDriver driver;
     private final TestConfiguration testConfiguration;
     private WebDriverWait wait;
@@ -191,10 +191,25 @@ public class UIAction implements Action {
             }
         };
         try {
-            logger.info("waiting for page load...");
+            log.info("waiting for page load...");
             wait.until(expectation);
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+
+    @Override
+    public  void waitFor(double sec) {
+        try {
+            if (sec < 0 || sec > 500) {
+                throw new IllegalArgumentException("Wait is specified is greater than 500 sec.");
+            }
+            log.info("waiting for "+(long) (sec*1000)+" sec...");
+            Thread.sleep((long) (sec*1000));
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 

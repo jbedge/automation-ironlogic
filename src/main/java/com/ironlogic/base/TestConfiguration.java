@@ -29,6 +29,7 @@ public class TestConfiguration {
     private String failedStep;
     private String exception;
     private String locator;
+    private String email;
 
     public TestConfiguration() throws IOException {
         loadIniConfig().getConfigParameters();
