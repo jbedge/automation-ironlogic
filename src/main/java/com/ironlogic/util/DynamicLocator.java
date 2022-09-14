@@ -1,4 +1,4 @@
-package com.ironlogic.core.pages;
+package com.ironlogic.util;
 
 import org.openqa.selenium.By;
 
@@ -6,9 +6,12 @@ public enum DynamicLocator {
 
     HamBurgerMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
     HamBurgerSubMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
-    Nav_Header("//h5[normalize-space()='Retailer Management > Invite Retailers']"),
+    H5_Header("//h5[normalize-space()='tempValue']"),
+    H6_Header("//h6[normalize-space()='tempValue']"),
     DropDown("//label[normalize-space()='tempValue']//following-sibling::div//div[text()='Select']"),
     DropDownVal("//div[contains(@class,'options')]//div[@data-index][2]"),
+    Email_Header("//td[normalize-space()=\"tempValue\"]"),
+    BUTTON("//button[normalize-space()='tempValue']"),
     ;
 
 

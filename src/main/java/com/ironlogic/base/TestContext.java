@@ -13,7 +13,7 @@ public class TestContext {
     Logger logger = LoggerFactory.getLogger(TestConfiguration.class);
 
     public TestContext() throws Exception {
-        testConfiguration = new TestConfiguration();
+        testConfiguration = TestConfiguration.getInstance();
         webDriverManager = new DriverManager(testConfiguration);
         driver=webDriverManager.initDriver();
     }

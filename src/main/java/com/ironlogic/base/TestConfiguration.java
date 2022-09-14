@@ -3,6 +3,7 @@ package com.ironlogic.base;
 import com.ironlogic.data.Constants;
 import io.cucumber.java.Scenario;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.ini4j.Ini;
 import org.ini4j.Profile;
 import org.slf4j.Logger;
@@ -13,6 +14,16 @@ import java.util.Set;
 
 @Data
 public class TestConfiguration {
+
+//    static class is used to get the singleton objects
+//    as static class loads before the class and hecne there will be only one instance
+    private static class Holder {
+        private static final TestConfiguration INSTANCE = new TestConfiguration();
+    }
+
+    public static TestConfiguration getInstance() {
+        return Holder.INSTANCE;
+    }
 
     Logger log = LoggerFactory.getLogger(TestConfiguration.class);
     private String env;
@@ -30,8 +41,11 @@ public class TestConfiguration {
     private String exception;
     private String locator;
     private String email;
+    private String mailinatorURL;
 
-    public TestConfiguration() throws IOException {
+    @SneakyThrows
+    private TestConfiguration()  {
+        System.out.println("Inside the method");
         loadIniConfig().getConfigParameters();
     }
 
@@ -56,6 +70,7 @@ public class TestConfiguration {
         this.setRetailUser(section.get("retailer.user"));
         this.setRetailPwd(section.get("retailer.pwd"));
         this.setUrl(section.get("url"));
+        this.setMailinatorURL(section.get("mailinator.url"));
     }
 
     public Profile.Section getSection(String sectionName){

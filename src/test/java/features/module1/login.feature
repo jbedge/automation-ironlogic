@@ -15,3 +15,11 @@ Feature: Login to the website and verify the home page
     Examples:
       | menu                | submenu         |
       | Retailer Management | Invite Retailer |
+
+  Scenario: verify the email sent to mailinator and proceed from the email link
+    Given I navigate to "mailinator" url
+    And I search email in mailinator
+    And I verify the email new email recived in the inbox
+    And I click on the email receievd
+    And I click on registration link from the email
+    Then I verify the new tab displayed with create account form

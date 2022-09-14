@@ -9,8 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ironlogic.core.pages.DynamicLocator.*;
+import static com.ironlogic.util.DynamicLocator.*;
 import static com.ironlogic.data.RunTimeData.*;
+import static com.ironlogic.util.TextMessage.*;
 
 
 public class HomePage extends UIAction {
@@ -38,7 +39,7 @@ public class HomePage extends UIAction {
         click(loc);
         waitFor(0.2);
         click(subloc);
-        verifyElementDisplayed(Nav_Header.getLocator(),"verify the navigation header displayed");
+        verifyElementDisplayed(H5_Header.setValue(NAV_HEADER_INVITE_RETAILER.toString()).getLocator(),"verify the navigation header displayed");
     }
 
 
@@ -46,7 +47,6 @@ public class HomePage extends UIAction {
         By loc=DropDown.setValue(Drop_Down_Value.getValue()).getLocator();
         click(loc);
         click(DropDownVal.getLocator());
-        System.out.println();
     }
 
     public void setCROLNumber(int size){
@@ -68,6 +68,6 @@ public class HomePage extends UIAction {
         verifyElementDisplayed(successMsg,"verify the success alert displayed");
         waitForVisibilityOfElement(inviteUrl).getAttribute("href");
         click(inviteUrl);
-
+        verifyNewTabDisplayedWithCreateAccountForm();
     }
 }

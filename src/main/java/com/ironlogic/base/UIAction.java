@@ -9,12 +9,12 @@ import org.openqa.selenium.support.ui.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
+import java.util.Set;
+
+import static com.ironlogic.util.DynamicLocator.H6_Header;
+import static com.ironlogic.util.TextMessage.CREATE_ACCOUNT_TITLE;
+import static com.ironlogic.util.TextMessage.HEADER_CREATE_ACCT;
 
 
 public class UIAction implements Action {
@@ -35,8 +35,19 @@ public class UIAction implements Action {
         js.executeScript("arguments[0].style.border='solid 2px orange'", element);
     }
 
+    public void getURL(String url){
+        driver.get(url);
+        this.waitForPageLoad();
+    }
+
+
     public void setText(By locator, CharSequence... value) {
         waitForVisibilityOfElement(locator).sendKeys(value);
+    }
+
+    public void setTextUsingJS(By locator, CharSequence... value) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value='"+value+"';", waitForPresenceOfElement(locator));
     }
 
     public void setText(By locator, Keys value) {
@@ -170,6 +181,11 @@ public class UIAction implements Action {
         js.executeScript("arguments[0].click();", waitForPresenceOfElement(loc));
     }
 
+    public void executeScript(String script) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(script);
+    }
+
     @Override
     public void clickUsingAction(By loc) {
         Actions actions = new Actions(driver);
@@ -229,6 +245,10 @@ public class UIAction implements Action {
         return "Failed method not found.";
     }
 
+    public void switchToIframe(By locator) {
+        driver.switchTo().frame(waitForPresenceOfElement(locator));
+    }
+
     @SneakyThrows
     public void commonExceptions(Exception e) {
         int target=0;
@@ -255,6 +275,29 @@ public class UIAction implements Action {
         }
     }
 
+    public void switchToNewWindow(String title) {
+        waitForPageLoad();
+        if(driver.getTitle().equals(title)){
+            return;
+        }
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        Set<String> winids=driver.getWindowHandles();
+        for (String winid:winids){
+            if(getTitle(winid).equals(title)){
+                return;
+            }
+        }
+    }
 
+    public String getTitle(String windID){
+        driver.switchTo().window(windID);
+        return driver.getTitle();
+    }
+
+    public void verifyNewTabDisplayedWithCreateAccountForm() {
+        switchToNewWindow(CREATE_ACCOUNT_TITLE.toString());
+        By hdrCreateAccount=H6_Header.setValue(HEADER_CREATE_ACCT.toString()).getLocator();
+        verifyElementDisplayed(hdrCreateAccount,"Header displayed successfully :"+HEADER_CREATE_ACCT);
+    }
 
 }

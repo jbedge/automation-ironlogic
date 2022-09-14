@@ -34,6 +34,14 @@ public class LoginPage extends UIAction {
         logger.info("Completed:getURL");
     }
 
+    public void getURL(String url)  {
+        logger.info("Started:getURL");
+        driver.manage().window().maximize();
+        driver.get(url);
+        waitForPageLoad();
+        logger.info("Completed:getURL");
+    }
+
     public void enterCredentials(){
         logger.info("started : enterCredentials");
         waitForVisibilityOfElement(inpEmail);

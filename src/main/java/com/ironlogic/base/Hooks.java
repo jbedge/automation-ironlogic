@@ -10,38 +10,39 @@ public class Hooks {
     WebDriver driver;
     TestContext testContext;
 
-    public Hooks(TestContext context){
-        testContext=context;
-        driver=context.getDriver();
+    public Hooks(TestContext context) {
+        testContext = context;
+        driver = context.getDriver();
     }
 
     @Before
-    public void setup(Scenario scenario){
+    public void setup(Scenario scenario) {
         testContext.getTestConfiguration().setScenario(scenario);
     }
 
     @AfterStep("@config")
-    public void setScenarios(Scenario scenario){
+    public void setScenarios(Scenario scenario) {
         testContext.getTestConfiguration().setScenario(scenario);
     }
 
     @After
-    public void closeDriver(Scenario scenario){
+    public void closeDriver(Scenario scenario) {
+        boolean isfailed = scenario.isFailed();
+        boolean isPass=!isfailed;
         try {
-            testContext.getWebDriverManager().getScreenshot(scenario,scenario.getId());
-        }
-        catch (Exception e){
+            if (isfailed) {
+                testContext.getWebDriverManager().getScreenshot(scenario, scenario.getId());
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
+        if (isPass) {
             testContext.getWebDriverManager().quitDriver();
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 
     @AfterSuite
-    public void generateReport(){
+    public void generateReport() {
         System.out.println("insdie after suite");
     }
 
