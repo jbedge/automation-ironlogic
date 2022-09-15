@@ -23,3 +23,8 @@ Feature: Login to the website and verify the home page
     And I click on the email receievd
     And I click on registration link from the email
     Then I verify the new tab displayed with create account form
+    And I add account details
+    And I click on confirm password button
+    And I accept terms and condition and clicks on next step
+
+

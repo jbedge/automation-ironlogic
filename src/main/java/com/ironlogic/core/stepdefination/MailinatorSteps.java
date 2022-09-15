@@ -52,4 +52,6 @@ public class MailinatorSteps {
     public void iVerifyTheNewTabDisplayedWithCreateAccountForm() {
         mailinatorPage.verifyNewTabDisplayedWithCreateAccountForm();
     }
+
+
 }

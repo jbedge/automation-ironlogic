@@ -143,7 +143,7 @@ public class UIAction implements Action {
     public WebElement findElement(By loc) {
         try {
             testConfiguration.setLocator(loc.toString());
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
             return driver.findElement(loc);
         } catch (Exception e) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
@@ -173,6 +173,13 @@ public class UIAction implements Action {
     @Override
     public void click(By loc) {
         waitForVisibilityOfElement(loc).click();
+    }
+
+    public void selectCheckBox(By loc) {
+        WebElement element=waitForVisibilityOfElement(loc);
+        if(!element.isSelected()){
+            element.click();
+        }
     }
 
     @Override

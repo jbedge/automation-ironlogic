@@ -13,7 +13,7 @@ public class HomePageSteps {
     private TestConfiguration testConfiguration;
 
     public HomePageSteps(TestContext testContext){
-//        PropertyConfigurator.configure(System.getProperty("user.dir")+"\\resources\\log4j.properties");
+//      PropertyConfigurator.configure(System.getProperty("user.dir")+"\\resources\\log4j.properties");
         this.testContext=testContext;
         testConfiguration=testContext.getTestConfiguration();
         homePage =new HomePage(testContext);

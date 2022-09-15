@@ -1,5 +1,7 @@
 package com.ironlogic.base;
 
+import com.ironlogic.data.RunTimeData;
+import com.ironlogic.util.RandomUtil;
 import io.cucumber.core.gherkin.Step;
 import io.cucumber.java.*;
 import org.openqa.selenium.WebDriver;
@@ -9,20 +11,22 @@ public class Hooks {
 
     WebDriver driver;
     TestContext testContext;
+    private TestConfiguration config;
 
     public Hooks(TestContext context) {
         testContext = context;
         driver = context.getDriver();
+        config=testContext.getTestConfiguration();
     }
 
     @Before
     public void setup(Scenario scenario) {
-        testContext.getTestConfiguration().setScenario(scenario);
+        config.setScenario(scenario);
     }
 
     @AfterStep("@config")
     public void setScenarios(Scenario scenario) {
-        testContext.getTestConfiguration().setScenario(scenario);
+        config.setScenario(scenario);
     }
 
     @After
@@ -39,11 +43,17 @@ public class Hooks {
         if (isPass) {
             testContext.getWebDriverManager().quitDriver();
         }
+        RandomUtil.dumpRuntimeData(config);
     }
 
     @AfterSuite
     public void generateReport() {
         System.out.println("insdie after suite");
+    }
+
+    @AfterAll
+    public static void afterAll(){
+        System.out.println();
     }
 
 }

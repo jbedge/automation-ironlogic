@@ -32,6 +32,12 @@ public class TestConfiguration {
     private Ini ini;
     private Profile.Section currentSection;
     private String adminUser;
+
+    @Override
+    public String toString() {
+        return "Environment='" + env + '\'' + ", AdminUser='" + adminUser + '\'' + ", AdminPwd='" + adminPwd + '\'' + ", RetailUser='" + retailUser + '\'' + ", RetailPwd='" + retailPwd + '\'' + ", Email='" + email + '\'' + ", FirstName='" + firstName + '\'' + ", LastName='" + LastName + '\'' + ", ContactNumber='" + contactNumber + '\'' + ", Password='" + password + '\'';
+    }
+
     private String adminPwd;
     private String retailUser;
     private String retailPwd;
@@ -42,6 +48,10 @@ public class TestConfiguration {
     private String locator;
     private String email;
     private String mailinatorURL;
+    private String firstName;
+    private String LastName;
+    private String contactNumber;
+    private String password;
 
     @SneakyThrows
     private TestConfiguration()  {

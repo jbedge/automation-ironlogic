@@ -1,6 +1,12 @@
 package com.ironlogic.util;
 
+import com.ironlogic.base.TestConfiguration;
+import com.opencsv.CSVWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Random;
+
+import static com.ironlogic.data.Constants.TEST_DATA;
 
 public class RandomUtil {
 
@@ -41,11 +47,46 @@ public class RandomUtil {
         return outStr;
     }
 
+    public static String getRandom(String expInput, int lenght) {
+        StringBuilder out = new StringBuilder();
+        Random rnd = new Random();
+        while (out.length() < lenght) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * expInput.length());
+            out.append(expInput.charAt(index));
+        }
+        String outStr = out.toString();
+        return outStr;
+    }
+
+    public static String getRandomPassword() {
+        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowercase = uppercase.toLowerCase();
+        String numbers = "1234567890";
+        String splCharacters = "!@#$%^&*()?<>";
+        StringBuilder out = new StringBuilder();
+        out.append(getRandom(uppercase, 3))
+                .append(getRandom(numbers, 2))
+                .append(getRandom(lowercase, 3))
+                .append(getRandom(splCharacters, 2));
+        String outStr = out.toString();
+        return outStr;
+    }
+
     public static void main(String[] args) {
 
     }
-
-
+    public static void dumpRuntimeData(TestConfiguration config) {
+        try {
+            File file = new File(TEST_DATA);
+            FileWriter outputfile = new FileWriter(file,true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] headers = new String[]{config.toString()};
+            writer.writeNext( headers);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

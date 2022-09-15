@@ -2,6 +2,7 @@ package com.ironlogic.core.pages;
 
 import com.ironlogic.base.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,17 +29,22 @@ public class LoginPage extends UIAction {
 
     public void getURL()  {
         logger.info("Started:getURL");
-        driver.manage().window().maximize();
-        driver.get(testConfig.getUrl());
-        waitForPageLoad();
+        getURL(testConfig.getUrl());
         logger.info("Completed:getURL");
     }
 
     public void getURL(String url)  {
         logger.info("Started:getURL");
-        driver.manage().window().maximize();
-        driver.get(url);
-        waitForPageLoad();
+        try {
+            driver.manage().window().maximize();
+            driver.get(url);
+            waitForPageLoad();
+        }
+        catch (TimeoutException e){
+            driver.get(url);
+            waitForPageLoad();
+        }
+
         logger.info("Completed:getURL");
     }
 

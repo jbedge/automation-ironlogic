@@ -8,6 +8,8 @@ public enum TextMessage {
     CREATE_ACCOUNT_TITLE("Create a Password - OCS Wholesale"),
     HEADER_CREATE_ACCT("Create Account"),
     NAV_HEADER_INVITE_RETAILER("Retailer Management > Invite Retailers"),
+    BTN_CONFIRM_PASSWORD("Confirm Password"),
+    BTN_NEXT_STEP1("NEXT STEP 1: CROL HOLDER INFORMATION"),
     GO("GO"),
     ;
 
