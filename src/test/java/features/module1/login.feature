@@ -26,5 +26,13 @@ Feature: Login to the website and verify the home page
     And I add account details
     And I click on confirm password button
     And I accept terms and condition and clicks on next step
+    And I add CROL general information
+      | Entity Type         |
+      | Limited Partnership |
+    And I add CROL contact details
+    And I add CROL legal address details
+    And I add CROL store address details
+    Then I add CROL firstnation retailer Information and navigate to next
+
 
 

@@ -50,8 +50,8 @@ public class HomePage extends UIAction {
     }
 
     public void setCROLNumber(int size){
-        String crolNum=RandomUtil.getRandomNumber(size);
-        setText(inpCROLNumber,crolNum);
+        config.setCROL(RandomUtil.getRandomNumber(size));
+        setText(inpCROLNumber,config.getCROL());
     }
 
     public void setEmail(){

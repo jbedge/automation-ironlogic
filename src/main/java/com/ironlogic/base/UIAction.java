@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.Random;
 import java.util.Set;
 
 import static com.ironlogic.util.DynamicLocator.H6_Header;
@@ -36,13 +37,36 @@ public class UIAction implements Action {
     }
 
     public void getURL(String url){
-        driver.get(url);
-        this.waitForPageLoad();
+        try {
+            driver.manage().window().maximize();
+            driver.get(url);
+            this.waitForPageLoad();
+        }
+        catch (TimeoutException e){
+            driver.get(url);
+            waitForPageLoad();
+        }
+
     }
 
 
     public void setText(By locator, CharSequence... value) {
         waitForVisibilityOfElement(locator).sendKeys(value);
+    }
+
+    public void selectDropDown(By locator, String  visibleText) {
+        WebElement element=waitForVisibilityOfElement(locator);
+        Select select=new Select(element);
+        select.selectByVisibleText(visibleText);
+    }
+
+    public void selectDropDown(By locator) {
+        Random random=new Random();
+        WebElement element=waitForVisibilityOfElement(locator);
+        Select select=new Select(element);
+        int size=select.getOptions().size();
+        int index=random.nextInt(size);
+        select.selectByIndex(index);
     }
 
     public void setTextUsingJS(By locator, CharSequence... value) {

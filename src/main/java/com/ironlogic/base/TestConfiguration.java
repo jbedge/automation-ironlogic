@@ -35,7 +35,7 @@ public class TestConfiguration {
 
     @Override
     public String toString() {
-        return "Environment='" + env + '\'' + ", AdminUser='" + adminUser + '\'' + ", AdminPwd='" + adminPwd + '\'' + ", RetailUser='" + retailUser + '\'' + ", RetailPwd='" + retailPwd + '\'' + ", Email='" + email + '\'' + ", FirstName='" + firstName + '\'' + ", LastName='" + LastName + '\'' + ", ContactNumber='" + contactNumber + '\'' + ", Password='" + password + '\'';
+        return "Environment='" + env + '\'' + ", AdminUser='" + adminUser + '\'' + ", AdminPwd='" + adminPwd + '\'' + ", RetailUser='" + retailUser + '\'' + ", RetailPwd='" + retailPwd + '\'' + ", Email='" + email + '\'' + ", FirstName='" + firstName + '\'' + ", LastName='" + LastName + '\'' + ", ContactNumber='" + contactNumber + '\'' + ", Password='" + password + '\''+ ", CROL='" + CROL + '\'';
     }
 
     private String adminPwd;
@@ -52,6 +52,9 @@ public class TestConfiguration {
     private String LastName;
     private String contactNumber;
     private String password;
+    private String CROL;
+    private String rsaNumber;
+    private String CROLCertificateName;
 
     @SneakyThrows
     private TestConfiguration()  {

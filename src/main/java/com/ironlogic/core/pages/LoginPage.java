@@ -35,16 +35,7 @@ public class LoginPage extends UIAction {
 
     public void getURL(String url)  {
         logger.info("Started:getURL");
-        try {
-            driver.manage().window().maximize();
-            driver.get(url);
-            waitForPageLoad();
-        }
-        catch (TimeoutException e){
-            driver.get(url);
-            waitForPageLoad();
-        }
-
+        super.getURL(url);
         logger.info("Completed:getURL");
     }
 

@@ -7,6 +7,7 @@ public enum DynamicLocator {
     HamBurgerMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
     HamBurgerSubMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
     H5_Header("//h5[normalize-space()='tempValue']"),
+    H4_Header("//h4[normalize-space()='tempValue']"),
     H6_Header("//h6[normalize-space()='tempValue']"),
     DropDown("//label[normalize-space()='tempValue']//following-sibling::div//div[text()='Select']"),
     DropDownVal("//div[contains(@class,'options')]//div[@data-index][2]"),
@@ -41,14 +42,6 @@ public enum DynamicLocator {
         By locator=By.xpath(value);
         this.value=originValue;
         return locator;
-    }
-
-    public String getOrigin(){
-        return originValue;
-    }
-
-    public void setDefault(){
-        this.value=originValue;
     }
 
     @Override

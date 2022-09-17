@@ -10,6 +10,8 @@ public enum TextMessage {
     NAV_HEADER_INVITE_RETAILER("Retailer Management > Invite Retailers"),
     BTN_CONFIRM_PASSWORD("Confirm Password"),
     BTN_NEXT_STEP1("NEXT STEP 1: CROL HOLDER INFORMATION"),
+    BTN_NEXT_STEP2("Next: Step 2: Delivery Information"),
+    HDR_DELIVERY_INFO("Delivery Information"),
     GO("GO"),
     ;
 

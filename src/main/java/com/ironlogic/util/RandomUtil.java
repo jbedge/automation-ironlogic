@@ -5,6 +5,7 @@ import com.opencsv.CSVWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Random;
+import java.util.UUID;
 
 import static com.ironlogic.data.Constants.TEST_DATA;
 
@@ -36,12 +37,23 @@ public class RandomUtil {
     }
 
     public static String getRandomAlpahumeric(int lenght) {
-        String String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String alphanumeric= UUID.randomUUID().toString().replace("-", "");
+//        StringBuilder out = new StringBuilder();
+//        Random rnd = new Random();
+//        while (out.length() < lenght) { // length of the random string.
+//            int index = (int) (rnd.nextFloat() * alphanumeric.length());
+//            out.append(alphanumeric.charAt(index));
+//        }
+//        String outStr = out.toString();
+        return alphanumeric.substring(0, lenght);
+    }
+
+    public static String getRandomPostalCode(int lenght) {
         StringBuilder out = new StringBuilder();
         Random rnd = new Random();
         while (out.length() < lenght) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * String.length());
-            out.append(String.charAt(index));
+            out.append(getRandomString(1));
+            out.append(getRandomNumber(1));
         }
         String outStr = out.toString();
         return outStr;
@@ -73,7 +85,11 @@ public class RandomUtil {
     }
 
     public static void main(String[] args) {
-
+      String alphanumeric= UUID.randomUUID().toString().replace("-", "");
+        System.out.println(alphanumeric.substring(0, 6));
+        System.out.println(UUID.randomUUID());
+        System.out.println(UUID.randomUUID());
+        System.out.println(UUID.randomUUID());
     }
     public static void dumpRuntimeData(TestConfiguration config) {
         try {
@@ -87,6 +103,8 @@ public class RandomUtil {
             e.printStackTrace();
         }
     }
+
+
 
 
 }
