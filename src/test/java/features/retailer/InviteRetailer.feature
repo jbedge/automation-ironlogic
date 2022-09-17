@@ -1,4 +1,4 @@
-Feature: Login to the website and verify the home page
+Feature: Invite ratailer and add all the information
 
   Scenario Outline: login to the website and verify the homepage
     Given I launch the URL
@@ -33,6 +33,17 @@ Feature: Login to the website and verify the home page
     And I add CROL legal address details
     And I add CROL store address details
     Then I add CROL firstnation retailer Information and navigate to next
+    And I add delivery information
+    And I add operating hours
+      | Sunday             | Monday             | Tuesday            | Wednesday          | Thursday           | Friday             | Saturday           |
+      | 09:00 AM -10:00 AM | 09:00 AM -09:00 PM | 09:00 AM -09:00 PM | 09:00 AM -09:00 PM | 09:00 AM -09:00 PM | 09:00 AM -01:00 PM | 12:00 AM -01:30 AM |
+    And I save the information and click on next
+    And I upload all additional documents
+    Then I save the information and click on review and confirm
+    Then I verify CROL information header displayed and clicks on submit
+    Then I verify onboarding process details displayed
+      | Step 1 :                 | Step 2 :                   | Step 3 :                       | Step 4 :                       |
+      | NDA Acceptance,Submitted | CROL Information,Submitted | Delivery Information,Submitted | Additional Documents,Submitted |
 
 
 

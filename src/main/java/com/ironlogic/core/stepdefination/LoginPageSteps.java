@@ -3,6 +3,7 @@ package com.ironlogic.core.stepdefination;
 import com.ironlogic.base.TestConfiguration;
 import com.ironlogic.base.TestContext;
 import com.ironlogic.core.pages.LoginPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
@@ -43,6 +44,7 @@ public class LoginPageSteps {
     public void i_verify_home_page_displayed() {
         loginPage.waitForHeaderToLoad();
     }
+
 
 
 }

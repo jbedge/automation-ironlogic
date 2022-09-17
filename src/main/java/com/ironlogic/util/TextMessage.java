@@ -11,8 +11,19 @@ public enum TextMessage {
     BTN_CONFIRM_PASSWORD("Confirm Password"),
     BTN_NEXT_STEP1("NEXT STEP 1: CROL HOLDER INFORMATION"),
     BTN_NEXT_STEP2("Next: Step 2: Delivery Information"),
+    BTN_NEXT_STEP3("Next: Step 3: Additional Documents"),
+    BTN_REVIEW_CONFIRM("Review & Confirm"),
+    BTN_SUBMIT_APPLICATION("SUBMIT APPLICATION"),
     HDR_DELIVERY_INFO("Delivery Information"),
     GO("GO"),
+    BTN_SAVE("Save"),
+    SUCCESS_MESSAGE("Your information has been successfully saved"),
+    HDR_UPLOAD_DOCUMENTS("Upload Documents"),
+    HDR_REVIEW_CONFIRM("Review & Confirm"),
+    HDR_CROL_INFO("CROL Holder Information"),
+    FINAL_REVIEW_MSG("Your Registration was successfully submitted and is being reviewed. "),
+    FILE_PATH_PDF("C:\\Users\\Admin\\IdeaProjects\\Automation-IronLogic\\testdata\\Credentials - Jagadeesh Bedge.pdf"),
+    FILE_PATH_PNG("C:\\Users\\Admin\\IdeaProjects\\Automation-IronLogic\\testdata\\logo.png"),
     ;
 
 

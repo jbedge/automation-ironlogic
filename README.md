@@ -4,6 +4,14 @@
 taskkill /F /IM chromedriver.exe
 setTimeout(function(){debugger;},5000)
 
+function get42() {
+var tds = document.querySelectorAll('td'),
+result = [];
+for (var i = 0; i < tds.length; i++) {
+result.push(tds[i].textContent);
+}
+return result;
+}
 
 **Required fields:**
 

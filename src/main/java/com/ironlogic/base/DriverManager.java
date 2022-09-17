@@ -25,7 +25,7 @@ public class DriverManager {
     public Boolean serverStarted  = false;
     public String dummyText;
     private String LOCAL_DIRECTORY_SOURCE = System.getProperty("user.dir") + File.separator + "browserDrivers" + File.separator;
-    private String session_details = System.getProperty("user.dir") + File.separator + "tempFiles" + File.separator+"sessionDetails.tmp";
+    private String session_details = System.getProperty("user.dir") + File.separator + "testdata" + File.separator+"sessionDetails.tmp";
     TestConfiguration configuration;
 
 

@@ -58,7 +58,6 @@ public class TestConfiguration {
 
     @SneakyThrows
     private TestConfiguration()  {
-        System.out.println("Inside the method");
         loadIniConfig().getConfigParameters();
     }
 

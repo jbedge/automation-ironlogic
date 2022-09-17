@@ -87,10 +87,17 @@ public class CROLInformationPage extends UIAction {
     }
 
     public void addCROLFirstNationRetailerInformationAndSelectNext() {
-        selectDropDown(drpIsFirstNation,"No");
+
+
+        By btnSave=INPUT_BUTTON.setValue(BTN_SAVE).getLocator();
+        By successMsg=LABEL_TEXT.setValue(SUCCESS_MESSAGE).getLocator();
         By btnNext=SPAN_TEXT.setValue(BTN_NEXT_STEP2).getLocator();
-        click(btnNext);
         By hdrDeliveryInfo=H4_Header.setValue(HDR_DELIVERY_INFO).getLocator();
+
+        selectDropDown(drpIsFirstNation,"No");
+        click(btnSave);
+        verifyElementDisplayed(successMsg,"Verify success message displayed.");
+        click(btnNext);
         verifyElementDisplayed(hdrDeliveryInfo,"Delivery info header displayed successfully.");
     }
 
