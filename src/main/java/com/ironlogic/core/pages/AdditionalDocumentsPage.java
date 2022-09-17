@@ -50,14 +50,13 @@ public class AdditionalDocumentsPage extends UIAction {
 
     public void saveAndClickOnReviewAndConfirm(){
         By btnSave=BUTTON.setValue(BTN_SAVE).getLocator();
-        waitForPageLoad();
         By successMsg=LABEL_TEXT.setValue(SUCCESS_MESSAGE).getLocator();
         By review_confirm=SPAN_TEXT.setValue(BTN_REVIEW_CONFIRM).getLocator();
-
+        waitFor(10);
         click(btnSave);
+        waitFor(4);
         verifyElementDisplayed(successMsg,"Verify success message displayed.");
         click(review_confirm);
-
     }
 
     public void verifyCROLHolderheaderAndCLickonSubmit(){

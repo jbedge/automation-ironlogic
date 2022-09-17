@@ -21,7 +21,7 @@ public enum TextMessage {
     HDR_UPLOAD_DOCUMENTS("Upload Documents"),
     HDR_REVIEW_CONFIRM("Review & Confirm"),
     HDR_CROL_INFO("CROL Holder Information"),
-    FINAL_REVIEW_MSG("Your Registration was successfully submitted and is being reviewed. "),
+    FINAL_REVIEW_MSG("Your Registration was successfully submitted and is being reviewed."),
     FILE_PATH_PDF("C:\\Users\\Admin\\IdeaProjects\\Automation-IronLogic\\testdata\\Credentials - Jagadeesh Bedge.pdf"),
     FILE_PATH_PNG("C:\\Users\\Admin\\IdeaProjects\\Automation-IronLogic\\testdata\\logo.png"),
     ;

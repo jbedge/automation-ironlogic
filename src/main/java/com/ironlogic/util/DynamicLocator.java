@@ -8,7 +8,7 @@ public enum DynamicLocator {
     HamBurgerSubMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
     H5_Header("//h5[normalize-space()='tempValue']"),
     H1_Header("//h1[normalize-space()='tempValue']"),
-    H2_Header("//h2[normalize-space()='tempValue']"),
+    H2_Header("//h2[normalize-space(text())='tempValue']"),
     H4_Header("//h4[normalize-space()='tempValue']"),
     H6_Header("//h6[normalize-space()='tempValue']"),
     DropDown("//label[normalize-space()='tempValue']//following-sibling::div//div[text()='Select']"),
@@ -21,7 +21,7 @@ public enum DynamicLocator {
     SPAN_TEXT("//span[normalize-space()='tempValue']"),
     DAY_OPEN_FROM("//tr[.//label[text()='tempValue']]//*[@id='Opening']"),
     DAY_CLOSE_TO("//tr[.//label[text()='tempValue']]//*[@id='Closing']"),
-    ONBOARDING_PROCESS("//li[./b[normalize-space()='tempValue'] and ./span[normalize-space()='tempValue1'] and ./span[normalize-space()='tempValue2']]"),
+    ONBOARDING_PROCESS("//li[./b[normalize-space()='<tempValue>'] and ./span[normalize-space()='<tempValue1>'] and ./span[normalize-space()='<tempValue2>']]"),
     ;
 
 
@@ -40,7 +40,7 @@ public enum DynamicLocator {
 
     public DynamicLocator setValues(String... value) {
         originValue=this.value;
-        this.value=this.value.replace("tempValue",value[0]).replace("tempValue1",value[1]).replace("tempValue2",value[2]);
+        this.value=this.value.replace("<tempValue>",value[0]).replace("<tempValue1>",value[1]).replace("<tempValue2>",value[2]);
         return this;
     }
 

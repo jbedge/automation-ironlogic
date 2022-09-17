@@ -15,6 +15,6 @@ public class Constants {
     public static final long IMPLICIT_WAIT = 6;
 
     public static final String SCREENSHOT_PATH = "screenshot/";
-    public static final String TEST_DATA = "tempfiles/RuntimeData.csv";
+    public static final String TEST_DATA = "testdata/RuntimeData.csv";
 
 }
