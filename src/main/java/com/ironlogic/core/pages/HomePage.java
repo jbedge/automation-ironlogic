@@ -7,8 +7,12 @@ import com.ironlogic.base.UIAction;
 import com.ironlogic.util.RandomUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
 import static com.ironlogic.util.DynamicLocator.*;
 import static com.ironlogic.data.RunTimeData.*;
 import static com.ironlogic.util.TextMessage.*;
@@ -25,6 +29,7 @@ public class HomePage extends UIAction {
     private By btnSubmit=By.xpath("//button[text()='Submit']");
     private By successMsg=By.xpath("//h4[text()='Invitation Successfully Sent.']");
     private By inviteUrl=By.xpath("//*[@id='modalSuccess']//a");
+    private By inpOrganisation=By.xpath("//input[@placeholder='Search for Organizations']");
 
 
     public HomePage(TestContext testContext) {
@@ -46,7 +51,14 @@ public class HomePage extends UIAction {
     public void selectOrganizationDropDown() {
         By loc=DropDown.setValue(Drop_Down_Value.getValue()).getLocator();
         click(loc);
+        By organizationList=OrganizationList.getLocator();
+        List<WebElement> elements=findElements(organizationList);
+        int size=elements.size();
+        int act=RandomUtil.getRandomNumberFrom(size);
+        config.setOrganization(elements.get(act).getText());
+        setText(inpOrganisation,config.getOrganization());
         click(DropDownVal.getLocator());
+
     }
 
     public void setCROLNumber(int size){
@@ -56,8 +68,8 @@ public class HomePage extends UIAction {
 
     public void setEmail(){
         String tempEmail=RandomUtil.getRandomAlpahumeric(5);
-        config.setEmail(tempEmail+"@mailinator.com");
-        setText(inpEmail,config.getEmail());
+        config.setRetailEmail(tempEmail+"@mailinator.com");
+        setText(inpEmail,config.getRetailEmail());
     }
 
     public void clickOnSubmit(){

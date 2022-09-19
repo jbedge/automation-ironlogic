@@ -12,7 +12,8 @@ public enum DynamicLocator {
     H4_Header("//h4[normalize-space()='tempValue']"),
     H6_Header("//h6[normalize-space()='tempValue']"),
     DropDown("//label[normalize-space()='tempValue']//following-sibling::div//div[text()='Select']"),
-    DropDownVal("//div[contains(@class,'options')]//div[@data-index][2]"),
+    DropDownVal("//div[contains(@class,'fs-option') and not(contains(@class,'hidden')) and @data-index]"),
+    OrganizationList("//div[contains(@class,'options')]//div[not(@data-index='0') and @data-index]"),
 //    dont remove backslash in below xpath added intentionaly to overcome signle quote in string
     Email_Header("//td[normalize-space()=\"tempValue\"]"),
     BUTTON("//button[normalize-space()='tempValue']"),

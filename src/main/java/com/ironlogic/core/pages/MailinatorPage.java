@@ -32,7 +32,7 @@ public class MailinatorPage extends UIAction {
 
 
     public void searchEmail() {
-        setText(inpSearch,config.getEmail());
+        setText(inpSearch,config.getRetailEmail());
         By btnGo=BUTTON.setValue(GO.toString()).getLocator();
         click(btnGo);
     }

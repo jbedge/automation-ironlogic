@@ -15,8 +15,10 @@ import java.util.Set;
 @Data
 public class TestConfiguration {
 
-//    static class is used to get the singleton objects
-//    as static class loads before the class and hecne there will be only one instance
+
+
+//  static class is used to get the singleton objects
+//  as static class loads before the class and hecne there will be only one instance
     private static class Holder {
         private static final TestConfiguration INSTANCE = new TestConfiguration();
     }
@@ -33,20 +35,15 @@ public class TestConfiguration {
     private Profile.Section currentSection;
     private String adminUser;
 
-    @Override
-    public String toString() {
-        return "Environment='" + env + '\'' + ", AdminUser='" + adminUser + '\'' + ", AdminPwd='" + adminPwd + '\'' + ", RetailUser='" + retailUser + '\'' + ", RetailPwd='" + retailPwd + '\'' + ", Email='" + email + '\'' + ", FirstName='" + firstName + '\'' + ", LastName='" + LastName + '\'' + ", ContactNumber='" + contactNumber + '\'' + ", Password='" + password + '\''+ ", CROL='" + CROL + '\'';
-    }
+
 
     private String adminPwd;
-    private String retailUser;
-    private String retailPwd;
     private String url;
     private String failedMethod;
     private String failedStep;
     private String exception;
     private String locator;
-    private String email;
+    private String retailEmail;
     private String mailinatorURL;
     private String firstName;
     private String LastName;
@@ -55,6 +52,19 @@ public class TestConfiguration {
     private String CROL;
     private String rsaNumber;
     private String CROLCertificateName;
+    private String organization;
+    private String street;
+    private String street2;
+    private String city;
+    private String postalCode;
+    private String storeName;
+    private String store_street;
+    private String store_street2;
+    private String store_city;
+    private String store_postalCode;
+    private String CROLFirstName;
+    private String CROLLastName;
+    private String CROLContactNumber;
 
     @SneakyThrows
     private TestConfiguration()  {
@@ -79,14 +89,42 @@ public class TestConfiguration {
         this.setCurrentSection(getSection(getEnv()));
         this.setAdminUser(section.get("admin.user"));
         this.setAdminPwd(section.get("admin.pwd"));
-        this.setRetailUser(section.get("retailer.user"));
-        this.setRetailPwd(section.get("retailer.pwd"));
         this.setUrl(section.get("url"));
         this.setMailinatorURL(section.get("mailinator.url"));
     }
 
     public Profile.Section getSection(String sectionName){
         return ini.get(sectionName);
+    }
+
+    @Override
+    public String toString() {
+        return  "Environment='" + env + '\'' +
+                ", Browser='" + browser + '\'' +
+                ", AdminUser='" + adminUser + '\'' +
+                ", AdminPwd='" + adminPwd + '\'' +
+                ", url='" + url + '\'' +
+                ", retailEmail='" + retailEmail + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", CROL='" + CROL + '\'' +
+                ", RsaNumber='" + rsaNumber + '\'' +
+                ", CROLCertificateName='" + CROLCertificateName + '\'' +
+                ", Organization='" + organization + '\'' +
+                ", Street='" + street + '\'' +
+                ", Street2='" + street2 + '\'' +
+                ", City='" + city + '\'' +
+                ", PostalCode='" + postalCode + '\'' +
+                ", StoreName='" + storeName + '\'' +
+                ", Store_street='" + store_street + '\'' +
+                ", Store_street2='" + store_street2 + '\'' +
+                ", Store_city='" + store_city + '\'' +
+                ", Store_postalCode='" + store_postalCode + '\'' +
+                ", CROLFirstName='" + CROLFirstName + '\'' +
+                ", CROLLastName='" + CROLLastName + '\'' +
+                ", CROLContactNumber='" + CROLContactNumber + '\'';
     }
 
 }

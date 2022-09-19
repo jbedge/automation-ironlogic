@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -95,21 +96,6 @@ public class UIAction implements Action {
         }
     }
 
-    public WebElement waitForVisibilityOfElement(UIElement loc) {
-        WebElement element;
-        try {
-            element = wait.until(ExpectedConditions.visibilityOfElementLocated(loc.getElement()));
-            highlight(element);
-            return element;
-        } catch (TimeoutException e) {
-            element = findElement(loc);
-            return element;
-        } catch (Exception e) {
-            testConfiguration.setLocator(loc.toString());
-            commonExceptions(e);
-            return null;
-        }
-    }
 
     @Override
     public WebElement waitForVisibilityOfElement(By loc, long timeoutInSec) {
@@ -177,16 +163,20 @@ public class UIAction implements Action {
         }
     }
 
-    public WebElement findElement(UIElement loc) {
+    @Override
+    public List<WebElement> findElements(By loc) {
         try {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-            return driver.findElement(loc.getElement());
+            testConfiguration.setLocator(loc.toString());
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
+            return driver.findElements(loc);
         } catch (Exception e) {
-            testConfiguration.getScenario().log("Locator value:" + loc.getValue());
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
+            testConfiguration.getScenario().log("Locator value:" + loc);
             commonExceptions(e);
             throw e;
         }
     }
+
 
     public void verifyElementDisplayed(By loc, String log) {
         waitForVisibilityOfElement(loc);

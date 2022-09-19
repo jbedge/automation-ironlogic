@@ -8,7 +8,7 @@ Feature: Invite ratailer and add all the information
     And I select hamburger "<menu>" and "<submenu>"
     And I select random organization from dropdown
     And I enter 4 digit random number in CROL
-    And I enter random email address
+    And I enter random retail email address
     And I click on submit button
     Then I verify the success alert message displayed
 

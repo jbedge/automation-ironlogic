@@ -8,8 +8,13 @@ import com.ironlogic.util.RandomUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.ironlogic.util.DynamicLocator.*;
 import static com.ironlogic.util.TextMessage.*;
@@ -27,6 +32,7 @@ public class AdditionalDocumentsPage extends UIAction {
    private  By inpCROLLicense=By.xpath("//input[@id='uploads_3__Document' and @type='file']");
    private  By inpVoidCheque=By.xpath("//input[@id='uploads_4__Document' and @type='file']");
    private  By inpStoreLogo=By.xpath("//input[@id='uploads_5__Document' and @type='file']");
+   private By allText=By.xpath("//*[@id='task_tabsbar']//p[string-length(text())>1]");
 
 
     public AdditionalDocumentsPage(TestContext testContext) {
@@ -54,7 +60,7 @@ public class AdditionalDocumentsPage extends UIAction {
         By review_confirm=SPAN_TEXT.setValue(BTN_REVIEW_CONFIRM).getLocator();
         waitFor(10);
         click(btnSave);
-        waitFor(4);
+        waitFor(8);
         verifyElementDisplayed(successMsg,"Verify success message displayed.");
         click(review_confirm);
     }
@@ -69,6 +75,11 @@ public class AdditionalDocumentsPage extends UIAction {
         verifyElementDisplayed(hdrCROLInfo,"Verify CROL Info header displayed.");
         click(submit);
         verifyElementDisplayed(finalReview,"Verify final review message displayed.");
+        List<String> st = new ArrayList<>();
+        for (WebElement i : findElements(allText)) {
+            String text = i.getText();
+            st.add(text);
+        }
     }
 
 

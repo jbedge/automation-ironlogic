@@ -20,25 +20,25 @@ public class CROLInformationPage extends UIAction {
     private TestConfiguration config;
     Logger log = LoggerFactory.getLogger(CROLInformationPage.class);
 
-   private  By inpCROLCertificateName=By.xpath("//*[@id='CROLCertificateName']");
-   private  By drpSelectType=By.xpath("//*[@id='EntityTypeId']");
-   private  By inpRSANumber=By.xpath("//*[@id='RSANumber']");
-   private  By inpFirstName=By.xpath("//*[@id='FirstName']");
-   private  By inpLastName=By.xpath("//*[@id='LastName']");
-   private  By inpPhoneNumber=By.xpath("//*[@id='PhoneNumber']");
+    private By inpCROLCertificateName = By.xpath("//*[@id='CROLCertificateName']");
+    private By drpSelectType = By.xpath("//*[@id='EntityTypeId']");
+    private By inpRSANumber = By.xpath("//*[@id='RSANumber']");
+    private By inpFirstName = By.xpath("//*[@id='FirstName']");
+    private By inpLastName = By.xpath("//*[@id='LastName']");
+    private By inpPhoneNumber = By.xpath("//*[@id='PhoneNumber']");
 
-   private  By inpStreet=By.xpath("//*[@id='LegalAddress_Street']");
-   private  By inpStreet2=By.xpath("//*[@id='LegalAddress_Street2']");
-   private  By inpCity=By.xpath("//*[@id='LegalAddress_City']");
-   private  By inpPostalCode=By.xpath("//*[@id='LegalAddress_PostalCode']");
-   private  By drpProvince=By.xpath("//*[@id='LegalAddress_ProvinceId']");
-   private  By drpIsFirstNation=By.xpath("//*[@id='IsFirstNation']");
+    private By inpStreet = By.xpath("//*[@id='LegalAddress_Street']");
+    private By inpStreet2 = By.xpath("//*[@id='LegalAddress_Street2']");
+    private By inpCity = By.xpath("//*[@id='LegalAddress_City']");
+    private By inpPostalCode = By.xpath("//*[@id='LegalAddress_PostalCode']");
+    private By drpProvince = By.xpath("//*[@id='LegalAddress_ProvinceId']");
+    private By drpIsFirstNation = By.xpath("//*[@id='IsFirstNation']");
 
-    private  By inpStoreAddress_Street=By.xpath("//*[@id='StoreAddress_Street']");
-    private  By inpStoreName=By.xpath("//*[@id='StoreName']");
-    private  By inpStoreAddress_Street2=By.xpath("//*[@id='StoreAddress_Street2']");
-    private  By inpStoreAddress_City=By.xpath("//*[@id='StoreAddress_City']");
-    private  By inpStoreAddress_PostalCode=By.xpath("//*[@id='StoreAddress_PostalCode']");
+    private By inpStoreAddress_Street = By.xpath("//*[@id='StoreAddress_Street']");
+    private By inpStoreName = By.xpath("//*[@id='StoreName']");
+    private By inpStoreAddress_Street2 = By.xpath("//*[@id='StoreAddress_Street2']");
+    private By inpStoreAddress_City = By.xpath("//*[@id='StoreAddress_City']");
+    private By inpStoreAddress_PostalCode = By.xpath("//*[@id='StoreAddress_PostalCode']");
 
 
     public CROLInformationPage(TestContext testContext) {
@@ -47,58 +47,69 @@ public class CROLInformationPage extends UIAction {
         this.config = testContext.getTestConfiguration();
     }
 
-    public void generateAccountDetails(){
+    public void generateAccountDetails() {
+        config.setCROLFirstName(RandomUtil.getRandomString(6));
+        config.setCROLLastName(RandomUtil.getRandomString(6));
+        config.setCROLContactNumber(RandomUtil.getRandomNumber(10));
         config.setCROLCertificateName(RandomUtil.getRandomString(6));
         config.setRsaNumber(RandomUtil.getRandomNumber(7));
-        config.setFirstName(RandomUtil.getRandomString(6));
-        config.setLastName(RandomUtil.getRandomString(6));
-        config.setContactNumber(RandomUtil.getRandomNumber(10));
+
     }
 
-    public void addCROLCreateAccountDetails(String entityType){
+    public void addCROLCreateAccountDetails(String entityType) {
         generateAccountDetails();
         setText(inpCROLCertificateName, config.getCROLCertificateName());
         setText(inpRSANumber, config.getRsaNumber());
-        selectDropDown(drpSelectType,entityType);
+        selectDropDown(drpSelectType, entityType);
     }
 
 
     public void addCROLContactDetails() {
-        setText(inpFirstName, config.getFirstName());
-        setText(inpLastName, config.getLastName());
-        setText(inpPhoneNumber, config.getContactNumber());
+        setText(inpFirstName, config.getCROLFirstName());
+        setText(inpLastName, config.getCROLLastName());
+        setText(inpPhoneNumber, config.getCROLContactNumber());
     }
 
     public void addCROLLegalAddressDetails() {
-        setText(inpStreet, RandomUtil.getRandomNumber(2));
-        setText(inpStreet2, RandomUtil.getRandomNumber(2));
-        setText(inpCity, RandomUtil.getRandomString(6));
-        selectDropDown(drpProvince);
-        setText(inpPostalCode, RandomUtil.getRandomPostalCode(6));
+        config.setStreet(RandomUtil.getRandomNumber(2));
+        config.setStreet2(RandomUtil.getRandomNumber(2));
+        config.setCity(RandomUtil.getRandomString(6));
+        config.setPostalCode(RandomUtil.getRandomPostalCode(6));
 
+        setText(inpStreet, config.getStreet());
+        setText(inpStreet2, config.getStreet2());
+        setText(inpCity, config.getCity());
+        selectDropDown(drpProvince);
+        setText(inpPostalCode, config.getPostalCode());
     }
 
     public void addCROLStoreAddressDetails() {
-        setText(inpStoreName, RandomUtil.getRandomString(5));
-        setText(inpStoreAddress_Street, RandomUtil.getRandomNumber(2));
-        setText(inpStoreAddress_Street2, RandomUtil.getRandomNumber(2));
-        setText(inpStoreAddress_City, RandomUtil.getRandomString(6));
-        setText(inpStoreAddress_PostalCode, RandomUtil.getRandomPostalCode(6));
+        config.setStoreName(RandomUtil.getRandomString(5));
+        config.setStore_street(RandomUtil.getRandomNumber(2));
+        config.setStore_street2(RandomUtil.getRandomNumber(2));
+        config.setCity(RandomUtil.getRandomString(6));
+        config.setStore_postalCode(RandomUtil.getRandomPostalCode(6));
+
+        setText(inpStoreName, config.getStoreName());
+        setText(inpStoreAddress_Street, config.getStore_street());
+        setText(inpStoreAddress_Street2, config.getStore_street2());
+        setText(inpStoreAddress_City, config.getCity());
+        setText(inpStoreAddress_PostalCode, config.getPostalCode());
     }
 
     public void addCROLFirstNationRetailerInformationAndSelectNext() {
 
 
-        By btnSave=INPUT_BUTTON.setValue(BTN_SAVE).getLocator();
-        By successMsg=LABEL_TEXT.setValue(SUCCESS_MESSAGE).getLocator();
-        By btnNext=SPAN_TEXT.setValue(BTN_NEXT_STEP2).getLocator();
-        By hdrDeliveryInfo=H4_Header.setValue(HDR_DELIVERY_INFO).getLocator();
+        By btnSave = INPUT_BUTTON.setValue(BTN_SAVE).getLocator();
+        By successMsg = LABEL_TEXT.setValue(SUCCESS_MESSAGE).getLocator();
+        By btnNext = SPAN_TEXT.setValue(BTN_NEXT_STEP2).getLocator();
+        By hdrDeliveryInfo = H4_Header.setValue(HDR_DELIVERY_INFO).getLocator();
 
-        selectDropDown(drpIsFirstNation,"No");
+        selectDropDown(drpIsFirstNation, "No");
         click(btnSave);
-        verifyElementDisplayed(successMsg,"Verify success message displayed.");
+        verifyElementDisplayed(successMsg, "Verify success message displayed.");
         click(btnNext);
-        verifyElementDisplayed(hdrDeliveryInfo,"Delivery info header displayed successfully.");
+        verifyElementDisplayed(hdrDeliveryInfo, "Delivery info header displayed successfully.");
     }
 
 

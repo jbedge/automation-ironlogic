@@ -35,7 +35,7 @@ public class HomePageSteps {
         homePage.setCROLNumber(arg0);
     }
 
-    @And("I enter random email address")
+    @And("I enter random retail email address")
     public void iEnterRandomEmailAddress() {
         homePage.setEmail();
     }

@@ -70,6 +70,12 @@ public class RandomUtil {
         return outStr;
     }
 
+    public static int getRandomNumberFrom(int upperLimit){
+        Random random = new Random();
+        int index=random.nextInt(upperLimit);
+        return index;
+    }
+
     public static String getRandomPassword() {
         String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowercase = uppercase.toLowerCase();

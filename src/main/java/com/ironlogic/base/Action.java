@@ -3,8 +3,10 @@ package com.ironlogic.base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public interface Action {
+import java.util.List;
 
+public interface Action {
+     List<WebElement> findElements(By loc);
      WebElement waitForVisibilityOfElement(By loc);
      WebElement waitForVisibilityOfElement(By loc,long timeout);
      WebElement waitForPresenceOfElement(By loc);

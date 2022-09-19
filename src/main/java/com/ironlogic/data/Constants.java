@@ -10,7 +10,7 @@ public class Constants {
     public static final String DRIVER_PATH="browserDrivers/chromedriver.exe";
 
 //    in seconds
-    public static final int PAGE_TIME=30;
+    public static final int PAGE_TIME=60;
     public static final long POLL_TIME=1;
     public static final long IMPLICIT_WAIT = 6;
 
