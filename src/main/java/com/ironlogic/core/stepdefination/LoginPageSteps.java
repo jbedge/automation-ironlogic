@@ -30,9 +30,14 @@ public class LoginPageSteps {
 
 
 
-    @Given("I enter credentails")
+    @Given("I enter admin credentials")
     public void i_enter_credentails() {
         loginPage.enterCredentials();
+    }
+
+    @Given("I enter retail credentials")
+    public void i_enter_retailt_credentails() {
+        loginPage.enterRetailCredentials();
     }
 
     @Given("I click on login button")

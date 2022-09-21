@@ -65,6 +65,8 @@ public class TestConfiguration {
     private String CROLFirstName;
     private String CROLLastName;
     private String CROLContactNumber;
+    private String RetailUser1;
+    private String RetailUser2;
 
     @SneakyThrows
     private TestConfiguration()  {
@@ -91,6 +93,8 @@ public class TestConfiguration {
         this.setAdminPwd(section.get("admin.pwd"));
         this.setUrl(section.get("url"));
         this.setMailinatorURL(section.get("mailinator.url"));
+        this.setRetailUser1(section.get("retail.user1"));
+        this.setRetailUser2(section.get("retail.user2"));
     }
 
     public Profile.Section getSection(String sectionName){

@@ -53,7 +53,7 @@ public class CreateAccountPage extends UIAction {
     public void clickOnConfirmPassword(){
         By btnConfirmPassword=BUTTON.setValue(BTN_CONFIRM_PASSWORD).getLocator();
         click(btnConfirmPassword);
-        waitForPageLoad();
+        waitForPageToLoad();
         By userDetails=SPAN_TEXT.setValue(config.getFirstName()+" "+config.getLastName()).getLocator();
         verifyElementDisplayed(userDetails,"User login name verified successfully");
     }

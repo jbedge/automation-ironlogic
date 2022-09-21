@@ -20,6 +20,7 @@ public enum DynamicLocator {
     INPUT_BUTTON("//input[normalize-space(@value)='tempValue']"),
     LABEL_TEXT("//*[@id='successTitle']/label[normalize-space()='tempValue']"),
     SPAN_TEXT("//span[normalize-space()='tempValue']"),
+    HYPERLINK_BUTTON("//a[normalize-space()='tempValue']"),
     DAY_OPEN_FROM("//tr[.//label[text()='tempValue']]//*[@id='Opening']"),
     DAY_CLOSE_TO("//tr[.//label[text()='tempValue']]//*[@id='Closing']"),
     ONBOARDING_PROCESS("//li[./b[normalize-space()='<tempValue>'] and ./span[normalize-space()='<tempValue1>'] and ./span[normalize-space()='<tempValue2>']]"),

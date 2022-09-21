@@ -2,7 +2,7 @@ Feature: Invite ratailer and add all the information
 
   Scenario Outline: login to the website and verify the homepage
     Given I launch the URL
-    And I enter credentails
+    And I enter admin credentials
     And I click on login button
     Then I verify home page displayed
     And I select hamburger "<menu>" and "<submenu>"

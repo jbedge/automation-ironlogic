@@ -47,9 +47,19 @@ public class LoginPage extends UIAction {
         logger.info("completed : enterCredentials");
     }
 
+    public void enterRetailCredentials(){
+        logger.info("started : enterCredentials");
+        String user[]=testConfig.getRetailUser1().split("\\|");
+        waitForVisibilityOfElement(inpEmail);
+        setText(inpEmail,user[0]);
+        setText(inpPassword,user[1]);
+        logger.info("completed : enterCredentials");
+    }
+
     public void clickOnLogin(){
         logger.info("started : clickOnLogin");
         click(btnLogin);
+        waitForPageToLoad();
         logger.info("completed : clickOnLogin");
     }
 

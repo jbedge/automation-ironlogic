@@ -41,11 +41,11 @@ public class UIAction implements Action {
         try {
             driver.manage().window().maximize();
             driver.get(url);
-            this.waitForPageLoad();
+            this.waitForPageToLoad();
         }
         catch (TimeoutException e){
             driver.get(url);
-            waitForPageLoad();
+            waitForPageToLoad();
         }
 
     }
@@ -221,7 +221,8 @@ public class UIAction implements Action {
         driver.close();
     }
 
-    public void waitForPageLoad() {
+    @Override
+    public void waitForPageToLoad() {
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
@@ -297,7 +298,7 @@ public class UIAction implements Action {
     }
 
     public void switchToNewWindow(String title) {
-        waitForPageLoad();
+        waitForPageToLoad();
         if(driver.getTitle().equals(title)){
             return;
         }
