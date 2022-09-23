@@ -25,6 +25,17 @@ public class UIAction implements Action {
     public WebDriver driver;
     private final TestConfiguration testConfiguration;
     private WebDriverWait wait;
+    private WebElement webElement;
+
+
+    public WebElement getElement() {
+        return webElement;
+    }
+
+    public void setElement(WebElement element) {
+        this.webElement = element;
+    }
+
 
     public UIAction(TestContext context) {
         this.driver = context.getDriver();
@@ -55,6 +66,12 @@ public class UIAction implements Action {
         waitForVisibilityOfElement(locator).sendKeys(value);
     }
 
+    public void clearText(By locator) {
+        WebElement element=waitForVisibilityOfElement(locator);
+        element.clear();
+        element.sendKeys(Keys.CONTROL+"a"+Keys.BACK_SPACE);
+    }
+
     public void selectDropDown(By locator, String  visibleText) {
         WebElement element=waitForVisibilityOfElement(locator);
         Select select=new Select(element);
@@ -78,7 +95,7 @@ public class UIAction implements Action {
     public void setText(By locator, Keys value) {
         waitForVisibilityOfElement(locator).sendKeys(value);
     }
-
+    static int cnt=0;
     @Override
     public WebElement waitForVisibilityOfElement(By loc) {
         WebElement element;
@@ -87,6 +104,15 @@ public class UIAction implements Action {
             highlight(element);
             return element;
         } catch (TimeoutException e) {
+//            try {
+//                    if(selectPopUp()) {
+//                        element = wait.until(ExpectedConditions.visibilityOfElementLocated(loc));
+//                        highlight(element);
+//                        return element;
+//                    }
+//                }
+//            catch (Exception ex){
+//            }
             element = findElement(loc);
             return element;
         } catch (Exception e) {
@@ -146,6 +172,28 @@ public class UIAction implements Action {
             testConfiguration.setLocator(loc.toString());
             commonExceptions(e);
             return null;
+        }
+    }
+
+    public boolean isElementVisible(By loc, long timeoutInSec) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSec), Duration.ofSeconds(Constants.POLL_TIME));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(loc));
+            setElement(element);
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    WebElement popup;
+    public boolean isElementPresenct1(By loc, long timeoutInSec) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSec), Duration.ofSeconds(Constants.POLL_TIME));
+        try {
+            popup = wait.until(ExpectedConditions.presenceOfElementLocated(loc));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -271,6 +319,10 @@ public class UIAction implements Action {
         driver.switchTo().frame(waitForPresenceOfElement(locator));
     }
 
+    public void switchToDefault() {
+        driver.switchTo().defaultContent();
+    }
+
     @SneakyThrows
     public void commonExceptions(Exception e) {
         int target=0;
@@ -320,6 +372,48 @@ public class UIAction implements Action {
         switchToNewWindow(CREATE_ACCOUNT_TITLE.toString());
         By hdrCreateAccount=H6_Header.setValue(HEADER_CREATE_ACCT.toString()).getLocator();
         verifyElementDisplayed(hdrCreateAccount,"Header displayed successfully :"+HEADER_CREATE_ACCT);
+    }
+
+
+    public void verifyPopUp(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("async function getLocator(text){\n" +
+                "    while(true){\n" +
+                "    var expLoc;\n" +
+                "    await new Promise(r=>setTimeout(r,2000));\n" +
+                "    var loc=document.querySelectorAll('button');\n" +
+                "    for (let index = 0; index < loc.length ; index++) {\n" +
+                "//    console.log(loc[index].getAttribute(\"id\"))\n" +
+                "       if(loc[index].getAttribute(\"id\")===text){\n" +
+                "           expLoc=loc[index];\n" +
+                "           expLoc.click();\n" +
+                "           console.log(loc[index].getAttribute(\"id\"))\n" +
+                "           break;\n" +
+                "    }\n" +
+                "  }\n" +
+                " }\n" +
+                "};\n" +
+                "\n" +
+                "getLocator('ip-no');");
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    System.out.println("PopUp running...");
+//                    selectPopUp();
+//                }
+//            }
+//        }).start();
+    }
+
+    private By popupYes=By.xpath("//*[@id=\"ip-no\"]");
+    private By iframe=By.xpath("//*[@id=\"iPerceptionsFrame\"]");
+    public boolean selectPopUp(){
+        if(isElementPresenct1(popupYes,2)){
+            popup.click();
+            return true;
+        }
+        return false;
     }
 
 }

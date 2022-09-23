@@ -20,10 +20,12 @@ public enum DynamicLocator {
     INPUT_BUTTON("//input[normalize-space(@value)='tempValue']"),
     LABEL_TEXT("//*[@id='successTitle']/label[normalize-space()='tempValue']"),
     SPAN_TEXT("//span[normalize-space()='tempValue']"),
+    DIV_TEXT("//div[normalize-space(text())='tempValue']"),
     HYPERLINK_BUTTON("//a[normalize-space()='tempValue']"),
+    BTN_CONTINUE_OR_PLACE_ORDER("//a[normalize-space()='<tempValue0>' or normalize-space()='<tempValue1>']"),
     DAY_OPEN_FROM("//tr[.//label[text()='tempValue']]//*[@id='Opening']"),
     DAY_CLOSE_TO("//tr[.//label[text()='tempValue']]//*[@id='Closing']"),
-    ONBOARDING_PROCESS("//li[./b[normalize-space()='<tempValue>'] and ./span[normalize-space()='<tempValue1>'] and ./span[normalize-space()='<tempValue2>']]"),
+    ONBOARDING_PROCESS("//li[./b[normalize-space()='<tempValue0>'] and ./span[normalize-space()='<tempValue1>'] and ./span[normalize-space()='<tempValue2>']]"),
     ;
 
 
@@ -40,9 +42,14 @@ public enum DynamicLocator {
         return this;
     }
 
-    public DynamicLocator setValues(String... value) {
+    public DynamicLocator setValues(String... values) {
         originValue=this.value;
-        this.value=this.value.replace("<tempValue>",value[0]).replace("<tempValue1>",value[1]).replace("<tempValue2>",value[2]);
+        int index=0;
+        for (String val:values){
+            this.value=this.value.replace("<tempValue"+index+">",val);
+            index++;
+        }
+
         return this;
     }
 

@@ -24,6 +24,8 @@ public enum TextMessage {
     BTN_SAVE("Save"),
     SUCCESS_MESSAGE("Your information has been successfully saved"),
     MSG_PRODUCT_ADDED("Product Added To Your Order"),
+    MSG_SUBMIT_ORDER("Your Order Has Been Placed!"),
+    MSG_ORDER_SUBMITTED("ORDER SUBMITTED"),
     BTN_VIEW_MYORDER("VIEW MY ORDER"),
     BTN_CLEAR_ORDER("CLEAR ORDER"),
     HDR_UPLOAD_DOCUMENTS("Upload Documents"),

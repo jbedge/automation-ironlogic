@@ -29,13 +29,19 @@ public class OrderPage extends UIAction {
     private By inpSearchProductOrSKU=By.xpath("//*[@id=\"txtSearch\"]");
     private By plusIcon=By.xpath("//*[@id='divProdList']//div[@class='product-lists-pra']//img[contains(@src,'plus')]");
     private By btnAddToCart=By.xpath("//*[@id=\"btnAddToCart\"]");
-    private By btnCartWithItem=By.xpath("//*[@id=\"btnCartWithItemCount\"]");
+    private By btnCartWithItem=By.xpath("//*[@id=\"btnCartWithItemCount\" and ./span[text()>0]]");
+    private By btnCheckOut=By.xpath("//*[@id=\"submitOrderButton\"]");
+    private By btnSubmitOrder=By.xpath("//*[@id=\"SubmitOrder\"]");
+    private By confirmYes=By.xpath("//*[@id=\"modalConfirm\"]//*[@id=\"btnOkConfirm\"]");
+
 
     public OrderPage(TestContext testContext) {
         super(testContext);
         this.driver = driver;
         this.config = testContext.getTestConfiguration();
     }
+
+
 
     public void navigateToHamburgerMenu(String menu,String submenu){
         By loc=HamBurgerMenu.setValue(menu).getLocator();
@@ -47,12 +53,13 @@ public class OrderPage extends UIAction {
     }
 
     public void verifyOrderPageDisplayed() {
-        By loc=HYPERLINK_BUTTON.setValue(BTN_CONTINUE_ORDER).getLocator();
+        verifyPopUp();
+        By loc=BTN_CONTINUE_OR_PLACE_ORDER.setValues(BTN_CONTINUE_ORDER.toString(),BTN_PLACE_AN_ORDER.toString()).getLocator();
         verifyElementDisplayed(loc,"Verify header displayed "+BTN_CONTINUE_ORDER);
     }
 
     public void clickOnOrderPage() {
-        By btnplaceOrder = HYPERLINK_BUTTON.setValue(BTN_CONTINUE_ORDER).getLocator();
+        By btnplaceOrder = BTN_CONTINUE_OR_PLACE_ORDER.setValues(BTN_CONTINUE_ORDER.toString(),BTN_PLACE_AN_ORDER.toString()).getLocator();
         By btnViewAllProducts = HYPERLINK_BUTTON.setValue(BTN_VIEW_ALL_PRODUCTS).getLocator();
         click(btnplaceOrder);
         waitForPageToLoad();
@@ -62,7 +69,8 @@ public class OrderPage extends UIAction {
     public void placeOrderForStockSKu(String sku,int quantity) {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
         By loc3 = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
-        click(clear);
+        clickUsingJS(clear);
+        clearText(inpSearchProductOrSKU);
         setText(inpSearchProductOrSKU,sku);
         addQuantity(quantity);
         click(btnAddToCart);
@@ -71,10 +79,11 @@ public class OrderPage extends UIAction {
 
     public void placeOrderForFlowThroughSKU(String sku,int quantity) {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
-        By flowThrogh = HYPERLINK_BUTTON.setValue(BTN_FLOW_THROUGH).getLocator();
+//        By flowThrogh = HYPERLINK_BUTTON.setValue(BTN_FLOW_THROUGH).getLocator();
         By loc3 = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
-        click(flowThrogh);
+//        click(flowThrogh);
         click(clear);
+        clearText(inpSearchProductOrSKU);
         setText(inpSearchProductOrSKU,sku);
         addQuantity(quantity);
         click(btnAddToCart);
@@ -87,10 +96,36 @@ public class OrderPage extends UIAction {
 
     public void clearMyCart(){
         By btnViewMyOrder=BUTTON.setValue(BTN_VIEW_MYORDER).getLocator();
-        By btnClearOrder=BUTTON.setValue(BTN_CLEAR_ORDER).getLocator();
+        By btnClearOrder=SPAN_TEXT.setValue(BTN_CLEAR_ORDER).getLocator();
+        if(isElementVisible(btnCartWithItem,10)){
+            getElement().click();
+            click(btnViewMyOrder);
+            click(btnClearOrder);
+            click(confirmYes);
+            waitForPageToLoad();
+        }
+        else {
+            clickOnOrderPage();
+        }
+
+    }
+
+    public void submitOrder(){
+        By btnViewMyOrder=BUTTON.setValue(BTN_VIEW_MYORDER).getLocator();
+        By btnClearOrder=SPAN_TEXT.setValue(BTN_CLEAR_ORDER).getLocator();
         click(btnCartWithItem);
         click(btnViewMyOrder);
-        click(btnClearOrder);
+        waitForPageToLoad();
+        click(btnCheckOut);
+        waitForPageToLoad();
+        click(btnSubmitOrder);
+    }
+
+    public void verifyOrderSubmission(){
+        By loc=DIV_TEXT.setValue(MSG_SUBMIT_ORDER).getLocator();
+        By loc2=SPAN_TEXT.setValue(MSG_ORDER_SUBMITTED).getLocator();
+        verifyElementDisplayed(loc,"verify success message displayed after order submission.");
+        verifyElementDisplayed(loc2,"verify success message displayed after order submission.");
     }
 
 }

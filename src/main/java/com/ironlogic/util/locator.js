@@ -1,13 +1,18 @@
-function getLocator(text){
+async function getLocator(text){
+    while(true){
     var expLoc;
-    var loc=document.querySelectorAll('a');
+    await new Promise(r=>setTimeout(r,2000));
+    var loc=document.querySelectorAll('button');
     for (let index = 0; index < loc.length ; index++) {
-       if(loc[index].text===text){
+//    console.log(loc[index].getAttribute("id"))
+       if(loc[index].getAttribute("id")===text){
            expLoc=loc[index];
+           expLoc.click();
+           console.log(loc[index].getAttribute("id"))
            break;
     }
-}
-    return expLoc;
+  }
+ }
 };
 
-return getLocator('<SpecificText>').click();
+getLocator('ip-no');
