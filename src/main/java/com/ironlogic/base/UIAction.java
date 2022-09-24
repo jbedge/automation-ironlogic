@@ -27,6 +27,16 @@ public class UIAction implements Action {
     private WebDriverWait wait;
     private WebElement webElement;
 
+    public JavascriptExecutor getJs() {
+        return js;
+    }
+
+    public void setJs(WebDriver webDriver) {
+        this.js =  (JavascriptExecutor) webDriver;;
+    }
+
+    private JavascriptExecutor js;
+
 
     public WebElement getElement() {
         return webElement;
@@ -39,6 +49,7 @@ public class UIAction implements Action {
 
     public UIAction(TestContext context) {
         this.driver = context.getDriver();
+        this.setJs(driver);
         this.testConfiguration = context.getTestConfiguration();
         wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.PAGE_TIME), Duration.ofSeconds(Constants.POLL_TIME));
     }
@@ -376,34 +387,32 @@ public class UIAction implements Action {
 
 
     public void verifyPopUp(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("async function getLocator(text){\n" +
-                "    while(true){\n" +
-                "    var expLoc;\n" +
-                "    await new Promise(r=>setTimeout(r,2000));\n" +
-                "    var loc=document.querySelectorAll('button');\n" +
-                "    for (let index = 0; index < loc.length ; index++) {\n" +
-                "//    console.log(loc[index].getAttribute(\"id\"))\n" +
-                "       if(loc[index].getAttribute(\"id\")===text){\n" +
-                "           expLoc=loc[index];\n" +
-                "           expLoc.click();\n" +
-                "           console.log(loc[index].getAttribute(\"id\"))\n" +
-                "           break;\n" +
-                "    }\n" +
-                "  }\n" +
-                " }\n" +
-                "};\n" +
-                "\n" +
-                "getLocator('ip-no');");
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (true) {
-//                    System.out.println("PopUp running...");
-//                    selectPopUp();
-//                }
-//            }
-//        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    getJs().executeScript("async function getLocator(text){\n" +
+                            "    while(true){\n" +
+                            "    var expLoc;\n" +
+                            "    await new Promise(r=>setTimeout(r,200));\n" +
+                            "    var loc=document.querySelectorAll('button');\n" +
+                            "    for (let index = 0; index < loc.length ; index++) {\n" +
+                            "//    console.log(loc[index].getAttribute('id'))\n" +
+                            "       if(loc[index].getAttribute('id')===text){\n" +
+                            "           expLoc=loc[index];\n" +
+                            "           expLoc.click();\n" +
+                            "           console.log(loc[index].getAttribute('id'))\n" +
+                            "           break;\n" +
+                            "    }\n" +
+                            "  }\n" +
+                            " }\n" +
+                            "};\n" +
+                            "\n" +
+                            "getLocator('ip-no');");
+                }
+            }
+        }).start();
     }
 
     private By popupYes=By.xpath("//*[@id=\"ip-no\"]");

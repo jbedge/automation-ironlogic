@@ -1,16 +1,24 @@
 package com.ironlogic.base;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.ironlogic.data.Constants;
+import com.ironlogic.data.OrderData;
+import com.jayway.jsonpath.JsonPath;
 import io.cucumber.java.Scenario;
 import lombok.Data;
 import lombok.SneakyThrows;
+import org.apache.commons.io.IOUtils;
 import org.ini4j.Ini;
 import org.ini4j.Profile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 public class TestConfiguration {
@@ -34,7 +42,12 @@ public class TestConfiguration {
     private Ini ini;
     private Profile.Section currentSection;
     private String adminUser;
+    private OrderData[] orderData;
 
+
+
+    private OrderData order_data;
+    private int executioncnt;
 
 
     private String adminPwd;
@@ -73,6 +86,10 @@ public class TestConfiguration {
         loadIniConfig().getConfigParameters();
     }
 
+    public OrderData getOrder_data() {
+        return orderData[executioncnt];
+    }
+
     public TestConfiguration loadIniConfig() throws IOException {
         ini = new Ini(new File(Constants.INI_PATH));
         Set<String> sections=ini.keySet();
@@ -95,6 +112,16 @@ public class TestConfiguration {
         this.setMailinatorURL(section.get("mailinator.url"));
         this.setRetailUser1(section.get("retail.user1"));
         this.setRetailUser2(section.get("retail.user2"));
+        loadJSON(section.get("json.path"));
+    }
+
+    @SneakyThrows
+    public void loadJSON(String filepath){
+        String dir=System.getProperty("user.dir");
+        FileInputStream fis = new FileInputStream(dir+filepath);
+        String jsonBody = IOUtils.toString(fis, StandardCharsets.UTF_8);
+        ObjectMapper mapper = new ObjectMapper();
+        orderData = mapper.readValue(jsonBody, OrderData[].class);
     }
 
     public Profile.Section getSection(String sectionName){

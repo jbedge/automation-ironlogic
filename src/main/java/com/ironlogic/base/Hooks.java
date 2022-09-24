@@ -12,6 +12,7 @@ public class Hooks {
     WebDriver driver;
     TestContext testContext;
     private TestConfiguration config;
+    private static int cnt=0;
 
     public Hooks(TestContext context) {
         testContext = context;
@@ -22,6 +23,12 @@ public class Hooks {
     @Before
     public void setup(Scenario scenario) {
         config.setScenario(scenario);
+    }
+
+    @Before("@PlaceOrder")
+    public void executionCount() {
+        config.setExecutioncnt(cnt);
+        cnt++;
     }
 
     @AfterStep("@config")

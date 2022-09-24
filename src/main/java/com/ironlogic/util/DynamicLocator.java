@@ -6,6 +6,7 @@ public enum DynamicLocator {
 
     HamBurgerMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
     HamBurgerSubMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
+    OrderQuantity("//*[@id='divProdList']//div[@class='product-lists-pra' and .//p[normalize-space()='tempValue']]//img[contains(@src,'plus')]"),
     H5_Header("//h5[normalize-space()='tempValue']"),
     H1_Header("//h1[normalize-space()='tempValue']"),
     H2_Header("//h2[normalize-space(text())='tempValue']"),

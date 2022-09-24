@@ -27,7 +27,7 @@ public class OrderPage extends UIAction {
 
     private By inpCROLNumber=By.xpath("//*[@id='CROLNumber']");
     private By inpSearchProductOrSKU=By.xpath("//*[@id=\"txtSearch\"]");
-    private By plusIcon=By.xpath("//*[@id='divProdList']//div[@class='product-lists-pra']//img[contains(@src,'plus')]");
+    private By plusIcon=By.xpath("//*[@id='divProdList']//div[@class='product-lists-pra' and .//p[normalize-space()='300656_2x0.4g___']]//img[contains(@src,'plus')]");
     private By btnAddToCart=By.xpath("//*[@id=\"btnAddToCart\"]");
     private By btnCartWithItem=By.xpath("//*[@id=\"btnCartWithItemCount\" and ./span[text()>0]]");
     private By btnCheckOut=By.xpath("//*[@id=\"submitOrderButton\"]");
@@ -68,30 +68,37 @@ public class OrderPage extends UIAction {
 
     public void placeOrderForStockSKu(String sku,int quantity) {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
-        By loc3 = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
+        By msg = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
+        By plusIcon=OrderQuantity.setValue(sku).getLocator();
+
         clickUsingJS(clear);
         clearText(inpSearchProductOrSKU);
         setText(inpSearchProductOrSKU,sku);
-        addQuantity(quantity);
+        WebElement element=waitForVisibilityOfElement(plusIcon);
+        addQuantity(element,quantity);
         click(btnAddToCart);
-        verifyElementDisplayed(loc3,"Verify header displayed "+MSG_PRODUCT_ADDED);
+        verifyElementDisplayed(msg,"Verify header displayed "+MSG_PRODUCT_ADDED);
     }
 
     public void placeOrderForFlowThroughSKU(String sku,int quantity) {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
+        By plusIcon=OrderQuantity.setValue(sku).getLocator();
+        By msg = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
+
 //        By flowThrogh = HYPERLINK_BUTTON.setValue(BTN_FLOW_THROUGH).getLocator();
-        By loc3 = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
 //        click(flowThrogh);
-        click(clear);
+
+        clickUsingJS(clear);
         clearText(inpSearchProductOrSKU);
         setText(inpSearchProductOrSKU,sku);
-        addQuantity(quantity);
+        WebElement element=waitForVisibilityOfElement(plusIcon);
+        addQuantity(element,quantity);
         click(btnAddToCart);
-        verifyElementDisplayed(loc3,"Verify header displayed "+MSG_PRODUCT_ADDED);
+        verifyElementDisplayed(msg,"Verify header displayed "+MSG_PRODUCT_ADDED);
     }
 
-    public void addQuantity(int quanity){
-        IntStream.range(1,quanity).forEach(i->click(plusIcon));
+    public void addQuantity(WebElement element,int quanity){
+        IntStream.range(1,quanity).forEach(i->element.click());
     }
 
     public void clearMyCart(){

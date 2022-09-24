@@ -8,6 +8,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import java.util.ArrayList;
+
 public class OrderPageSteps {
 
     private OrderPage orderPage;
@@ -25,14 +27,20 @@ public class OrderPageSteps {
 
     @Then("I add stock SKU")
     public void addStockSKU() {
-        orderPage.placeOrderForStockSKu("300025_0.5g___",1);
-        orderPage.placeOrderForStockSKu("300084_0.5g___",2);
+        ArrayList<String> stockSKU=config.getOrder_data().getStockSKU();
+        for (String order:stockSKU){
+            String[] skuqty=order.split("\\|");
+            orderPage.placeOrderForStockSKu(skuqty[0],Integer.parseInt(skuqty[1]));
+        }
     }
 
     @Then("I add flow through SKU")
     public void addFlowSKU() {
-        orderPage.placeOrderForFlowThroughSKU("102693_3.5g___",2);
-        orderPage.placeOrderForFlowThroughSKU("103075_3.5g___",1);
+        ArrayList<String> stockSKU=config.getOrder_data().getFlowThroghSKU();
+        for (String order:stockSKU) {
+            String[] skuqty = order.split("\\|");
+            orderPage.placeOrderForFlowThroughSKU(skuqty[0],Integer.parseInt(skuqty[1]));
+        }
     }
 
     @Then("I clear my cart")

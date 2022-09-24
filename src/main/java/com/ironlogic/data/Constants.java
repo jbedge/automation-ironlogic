@@ -1,6 +1,5 @@
 package com.ironlogic.data;
 
-import java.time.Duration;
 
 public class Constants {
 
@@ -11,6 +10,7 @@ public class Constants {
 
 //    in seconds
     public static final int PAGE_TIME=120;
+    public static final int MAX_TIMEOUT=60;
     public static final long POLL_TIME=1;
     public static final long IMPLICIT_WAIT = 6;
 
