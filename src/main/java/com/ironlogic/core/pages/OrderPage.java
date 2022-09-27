@@ -25,10 +25,8 @@ public class OrderPage extends UIAction {
     private TestConfiguration config;
     Logger logger = LoggerFactory.getLogger(TestConfiguration.class);
 
-    private By inpCROLNumber=By.xpath("//*[@id='CROLNumber']");
     private By inpSearchProductOrSKU=By.xpath("//*[@id=\"txtSearch\"]");
-    private By plusIcon=By.xpath("//*[@id='divProdList']//div[@class='product-lists-pra' and .//p[normalize-space()='300656_2x0.4g___']]//img[contains(@src,'plus')]");
-    private By btnAddToCart=By.xpath("//*[@id=\"btnAddToCart\"]");
+//    private By btnAddToCart=By.xpath("//*[@id='btnAddToCart']");
     private By btnCartWithItem=By.xpath("//*[@id=\"btnCartWithItemCount\" and ./span[text()>0]]");
     private By btnCheckOut=By.xpath("//*[@id=\"submitOrderButton\"]");
     private By btnSubmitOrder=By.xpath("//*[@id=\"SubmitOrder\"]");
@@ -70,6 +68,7 @@ public class OrderPage extends UIAction {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
         By msg = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
         By plusIcon=OrderQuantity.setValue(sku).getLocator();
+        By btnAddToCart=AddToCart.setValue(sku).getLocator();
 
         clickUsingJS(clear);
         clearText(inpSearchProductOrSKU);
@@ -84,7 +83,7 @@ public class OrderPage extends UIAction {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
         By plusIcon=OrderQuantity.setValue(sku).getLocator();
         By msg = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
-
+        By btnAddToCart=AddToCart.setValue(sku).getLocator();
 //        By flowThrogh = HYPERLINK_BUTTON.setValue(BTN_FLOW_THROUGH).getLocator();
 //        click(flowThrogh);
 

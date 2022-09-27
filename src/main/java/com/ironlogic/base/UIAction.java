@@ -27,7 +27,7 @@ public class UIAction implements Action {
     private WebDriverWait wait;
     private WebElement webElement;
 
-    public JavascriptExecutor getJs() {
+    public synchronized JavascriptExecutor getJs() {
         return js;
     }
 
@@ -55,8 +55,7 @@ public class UIAction implements Action {
     }
 
     public void highlight(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].style.border='solid 2px orange'", element);
+        getJs().executeScript("arguments[0].style.border='solid 2px orange'", element);
     }
 
     public void getURL(String url){
@@ -99,8 +98,7 @@ public class UIAction implements Action {
     }
 
     public void setTextUsingJS(By locator, CharSequence... value) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value='"+value+"';", waitForPresenceOfElement(locator));
+        getJs().executeScript("arguments[0].value='"+value+"';", waitForPresenceOfElement(locator));
     }
 
     public void setText(By locator, Keys value) {
@@ -257,13 +255,11 @@ public class UIAction implements Action {
 
     @Override
     public void clickUsingJS(By loc) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", waitForPresenceOfElement(loc));
+        getJs().executeScript("arguments[0].click();", waitForPresenceOfElement(loc));
     }
 
     public void executeScript(String script) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(script);
+        getJs().executeScript(script);
     }
 
     @Override
@@ -392,7 +388,7 @@ public class UIAction implements Action {
             @Override
             public void run() {
                 while (true) {
-                    getJs().executeScript("async function getLocator(text){\n" +
+                    getJs().executeAsyncScript("async function getLocator(text){\n" +
                             "    while(true){\n" +
                             "    var expLoc;\n" +
                             "    await new Promise(r=>setTimeout(r,200));\n" +

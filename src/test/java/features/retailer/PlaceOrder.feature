@@ -10,8 +10,9 @@ Feature: Invite retailer and add all the information
     And I clear my cart
     And I add stock SKU
     And I add flow through SKU
-#    And I submit the order
-#    Then I verify the order submit message
+    And I submit the order
+    Then I verify the order submit message
+
 
     Examples:
       | retailusers|

@@ -50,6 +50,7 @@ public class Hooks {
         if (isPass) {
             testContext.getWebDriverManager().quitDriver();
         }
+//        testContext.getWebDriverManager().quitDriver();
         RandomUtil.dumpRuntimeData(config);
     }
 

@@ -100,8 +100,10 @@ public class RandomUtil {
     public static void dumpRuntimeData(TestConfiguration config) {
         try {
             File file = new File(TEST_DATA);
-            FileWriter outputfile = new FileWriter(file,true);
-            CSVWriter writer = new CSVWriter(outputfile);
+//            FileWriter outputfile = new FileWriter(file,true);
+            FileWriter outputfile = new FileWriter(TEST_DATA);
+            CSVWriter writer =new CSVWriter(outputfile, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+//            CSVWriter writer = new CSVWriter(outputfile);
             String[] headers = new String[]{config.toString()};
             writer.writeNext( headers);
             writer.close();
