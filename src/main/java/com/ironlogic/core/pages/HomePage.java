@@ -44,7 +44,8 @@ public class HomePage extends UIAction {
         click(loc);
         waitFor(0.2);
         click(subloc);
-        verifyElementDisplayed(H5_Header.setValue(NAV_HEADER_INVITE_RETAILER.toString()).getLocator(),"verify the navigation header displayed");
+        String hdr=String.format("%s > %s",menu,submenu);
+        verifyElementDisplayed(H5_Header.setValue(hdr).getLocator(),"verify the navigation header displayed");
     }
 
 

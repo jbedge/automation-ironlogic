@@ -29,6 +29,7 @@ public class OrderPage extends UIAction {
 //    private By btnAddToCart=By.xpath("//*[@id='btnAddToCart']");
     private By btnCartWithItem=By.xpath("//*[@id=\"btnCartWithItemCount\" and ./span[text()>0]]");
     private By btnCheckOut=By.xpath("//*[@id=\"submitOrderButton\"]");
+    private By hdrFlowThroughOrder=By.xpath("//a[contains(text(),'Flow-Through Order')]");
     private By btnSubmitOrder=By.xpath("//*[@id=\"SubmitOrder\"]");
     private By confirmYes=By.xpath("//*[@id=\"modalConfirm\"]//*[@id=\"btnOkConfirm\"]");
 
@@ -122,6 +123,7 @@ public class OrderPage extends UIAction {
         click(btnCartWithItem);
         click(btnViewMyOrder);
         waitForPageToLoad();
+        click(hdrFlowThroughOrder);
         click(btnCheckOut);
         waitForPageToLoad();
         click(btnSubmitOrder);

@@ -18,11 +18,7 @@ public class LoginPageSteps {
         loginPage = new LoginPage(testContext);
     }
 
-    @Then("I verify home page displayeds")
-    public void i_verify_home_page_displayeds() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+
 
     @Given("I launch the URL")
     public void i_launch_the_url() {

@@ -383,12 +383,11 @@ public class UIAction implements Action {
 
 
     public void verifyPopUp(){
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    getJs().executeAsyncScript("async function getLocator(text){\n" +
+                    getJs().executeScript("async function getLocator(text){\n" +
                             "    while(true){\n" +
                             "    var expLoc;\n" +
                             "    await new Promise(r=>setTimeout(r,200));\n" +
@@ -409,6 +408,7 @@ public class UIAction implements Action {
                 }
             }
         }).start();
+        System.out.println("5.....");
     }
 
     private By popupYes=By.xpath("//*[@id=\"ip-no\"]");
