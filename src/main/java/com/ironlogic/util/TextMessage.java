@@ -5,13 +5,17 @@ import org.openqa.selenium.By;
 public enum TextMessage {
 
     EMAIL_SUBJECT("You are Invited to Register on OCS's B2B Portal"),
+    EMAIL_SUBJECT_NEW_USER("Your Account has Been Created"),
+    EMAIL_SUBJECT_BODY("Your Account has been Created"),
     CREATE_ACCOUNT_TITLE("Create a Password - OCS Wholesale"),
     HEADER_CREATE_ACCT("Create Account"),
+    HDR_SIGNIN_TO_YOUR_ACCOUNT("Sign in to your account"),
     NAV_HEADER_INVITE_RETAILER("Retailer Management > Invite Retailers"),
     BTN_CONFIRM_PASSWORD("Confirm Password"),
     BTN_NEXT_STEP1("NEXT STEP 1: CROL HOLDER INFORMATION"),
     BTN_NEW_USER("New User"),
     BTN_NEXT_STEP2("Next: Step 2: Delivery Information"),
+    BTN_LOGIN("LOGIN"),
     BTN_NEXT_STEP3("Next: Step 3: Additional Documents"),
     BTN_REVIEW_CONFIRM("Review & Confirm"),
     BTN_PLACE_AN_ORDER("PLACE AN ORDER"),

@@ -10,6 +10,12 @@ Feature: Create Users
     And I click on new user button
     And I add "OCS" user details
     Then I click on submit button
+    And I verify success message
+    Given I navigate to "mailinator" url
+    And I search user email in mailinator
+    And I verify new email recived for new user
+    And I click on email and login
+    Then I verify new tab displayed
 
     Examples:
       | menu            | submenu |

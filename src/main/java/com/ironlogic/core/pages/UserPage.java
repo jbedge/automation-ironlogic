@@ -27,12 +27,16 @@ public class UserPage extends UIAction {
     private  By drpRole=By.xpath("//*[@id='UserRoleId']");
     private  By inpTitle=By.xpath("//*[@id='Title']");
     private  By inpStatus=By.xpath("//*[@id='StatusMessage']");
-
+    private By alert=By.xpath("//div[text()='User Successfully Updated.']");
 
     public UserPage(TestContext testContext) {
         super(testContext);
         this.driver = driver;
         this.config = testContext.getTestConfiguration();
+    }
+
+    public void verifySuccessMessage(){
+        verifyElementDisplayed(alert,"User created successfully.");
     }
 
     public void verifyUserHeaderDisplayed(String hdr){
@@ -62,8 +66,8 @@ public class UserPage extends UIAction {
         setText(inpLastName, config.getLastName());
         setText(inpPhoneNumber, config.getContactNumber());
         String tempEmail= RandomUtil.getRandomAlpahumeric(5);
-        config.setRetailEmail(tempEmail+"@mailinator.com");
-        setText(inpEmail,config.getRetailEmail());
+        config.setEmail(tempEmail+"@mailinator.com");
+        setText(inpEmail,config.getEmail());
         setText(inpStatus,RandomUtil.getRandomString(10));
         selectDropDown(drpRole);
     }

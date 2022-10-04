@@ -37,9 +37,21 @@ public class MailinatorPage extends UIAction {
         click(btnGo);
     }
 
+    public void searchUserEmail() {
+        setText(inpSearch,config.getEmail());
+        By btnGo=BUTTON.setValue(GO.toString()).getLocator();
+        click(btnGo);
+    }
+
     public void verifyNewEmailRecievedInTheInbox() {
         By email=Email_Header.setValue(EMAIL_SUBJECT.toString()).getLocator();
         verifyElementDisplayed(email,"verify the text displayed"+EMAIL_SUBJECT);
+    }
+
+    public void verifyNewEmailRecievedForUserCreation() {
+        By email=Email_Header.setValue(EMAIL_SUBJECT_NEW_USER).getLocator();
+        verifyElementDisplayed(email,"verify the text displayed"+EMAIL_SUBJECT);
+        click(email);
     }
 
     public void clickOnNewEmailReceived() {
@@ -51,6 +63,18 @@ public class MailinatorPage extends UIAction {
         switchToIframe(iframeBody);
         clickUsingAction(btnStartRegistration);
 //        clickUsingJS(btnStartRegistration);
+    }
+
+    public void verifyEmailRecivedAndCLickOnLOgin() {
+        switchToIframe(iframeBody);
+        By emailBody=Email_Header.setValue(EMAIL_SUBJECT_BODY).getLocator();
+        verifyElementDisplayed(emailBody,"Verify email recied :"+EMAIL_SUBJECT_BODY);
+        By btnLogin=HYPERLINK_BUTTON.setValue(BTN_LOGIN).getLocator();
+        click(btnLogin);
+    }
+
+    public void verifyNewTabDisplayed(){
+        verifyNewTabDisplayedWithSignIn(HDR_SIGNIN_TO_YOUR_ACCOUNT.toString());
     }
 
 

@@ -57,6 +57,7 @@ public class TestConfiguration {
     private String exception;
     private String locator;
     private String retailEmail;
+    private String email;
     private String mailinatorURL;
     private String firstName;
     private String LastName;

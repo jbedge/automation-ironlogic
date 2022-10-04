@@ -32,6 +32,7 @@ public class HomePage extends UIAction {
     private By inpOrganisation=By.xpath("//input[@placeholder='Search for Organizations']");
 
 
+
     public HomePage(TestContext testContext) {
         super(testContext);
         this.driver = driver;
@@ -83,4 +84,6 @@ public class HomePage extends UIAction {
         click(inviteUrl);
         verifyNewTabDisplayedWithCreateAccountForm();
     }
+
+
 }

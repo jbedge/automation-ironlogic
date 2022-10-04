@@ -14,9 +14,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static com.ironlogic.util.DynamicLocator.H6_Header;
-import static com.ironlogic.util.TextMessage.CREATE_ACCOUNT_TITLE;
-import static com.ironlogic.util.TextMessage.HEADER_CREATE_ACCT;
+import static com.ironlogic.util.DynamicLocator.*;
+import static com.ironlogic.util.TextMessage.*;
 
 
 public class UIAction implements Action {
@@ -379,6 +378,10 @@ public class UIAction implements Action {
         switchToNewWindow(CREATE_ACCOUNT_TITLE.toString());
         By hdrCreateAccount=H6_Header.setValue(HEADER_CREATE_ACCT.toString()).getLocator();
         verifyElementDisplayed(hdrCreateAccount,"Header displayed successfully :"+HEADER_CREATE_ACCT);
+    }
+
+    public void verifyNewTabDisplayedWithSignIn(String title) {
+        switchToNewWindow(title);
     }
 
 

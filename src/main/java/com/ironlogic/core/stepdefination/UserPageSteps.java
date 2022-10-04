@@ -33,4 +33,9 @@ public class UserPageSteps {
     public void iAddUserDetails(String arg0) {
         userPage.addOCSUserDetails(arg0);
     }
+
+    @And("I verify success message")
+    public void iverifySuccessMessage() {
+        userPage.verifySuccessMessage();
+    }
 }
