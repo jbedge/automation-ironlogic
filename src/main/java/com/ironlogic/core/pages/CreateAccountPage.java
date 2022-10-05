@@ -50,12 +50,24 @@ public class CreateAccountPage extends UIAction {
         setText(inputConfirmPassword, config.getPassword());
     }
 
+    public void addPassword(){
+        generateAccountDetails();
+        setText(inputPassword, config.getPassword());
+        setText(inputConfirmPassword, config.getPassword());
+    }
+
     public void clickOnConfirmPassword(){
         By btnConfirmPassword=BUTTON.setValue(BTN_CONFIRM_PASSWORD).getLocator();
         click(btnConfirmPassword);
         waitForPageToLoad();
         By userDetails=SPAN_TEXT.setValue(config.getFirstName()+" "+config.getLastName()).getLocator();
         verifyElementDisplayed(userDetails,"User login name verified successfully");
+    }
+
+    public void clickOnConfirmPassword1(){
+        By btnConfirmPassword=BUTTON.setValue(BTN_CONFIRM_PASSWORD).getLocator();
+        click(btnConfirmPassword);
+        waitForPageToLoad();
     }
 
     public void selectTermsAndConditionAndClickNextStep1(){

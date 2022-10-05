@@ -47,9 +47,20 @@ public class MailinatorSteps {
         mailinatorPage.verifyNewEmailRecievedForUserCreation();
     }
 
+    @And("I verify new email recived for licenced producer")
+    public void iVerifyTheNewEmailRecivedForLicencedProducer() {
+        mailinatorPage.verifyNewEmailRecievedForLicencedProducer();
+    }
+
     @And("I click on email and login")
     public void clickOnEmail() {
         mailinatorPage.verifyEmailRecivedAndCLickOnLOgin();
+    }
+
+
+    @And("verify Email Received For LicensedProducer")
+    public void verifyEmailRecivedForLicensedProducer() {
+        mailinatorPage.verifyEmailRecivedForLicensedProducer();
     }
 
     @And("I click on the email receievd")
@@ -70,6 +81,11 @@ public class MailinatorSteps {
     @Then("I verify new tab displayed")
     public void iVerifyTheNewTabDisplayed() {
         mailinatorPage.verifyNewTabDisplayed();
+    }
+
+    @Then("I verify new tab displayed for License Producer")
+    public void iVerifyTheNewTabDisplayedLicenseProducer() {
+        mailinatorPage.verifyNewTabDisplayedForLicenseProducer();
     }
 
 

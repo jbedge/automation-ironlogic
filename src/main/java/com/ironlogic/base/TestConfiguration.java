@@ -67,6 +67,7 @@ public class TestConfiguration {
     private String rsaNumber;
     private String CROLCertificateName;
     private String organization;
+    private String vendorName;
     private String street;
     private String street2;
     private String city;

@@ -7,8 +7,13 @@ import com.ironlogic.base.UIAction;
 import com.ironlogic.util.RandomUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+import static com.ironlogic.data.RunTimeData.Drop_Down_Value;
 import static com.ironlogic.util.DynamicLocator.*;
 import static com.ironlogic.util.TextMessage.*;
 
@@ -19,13 +24,15 @@ public class UserPage extends UIAction {
     private TestConfiguration config;
     Logger logger = LoggerFactory.getLogger(UserPage.class);
 
-    private By drpUserType=By.xpath("//*[@id=\"UserTypeId\"]");
+    private By drpUserType=By.xpath("//select[@id=\"UserTypeId\"]");
     private  By inpFirstName=By.xpath("//*[@id='FirstName']");
     private  By inpLastName=By.xpath("//*[@id='LastName']");
     private  By inpPhoneNumber=By.xpath("//*[@id='PhoneNumber']");
     private  By inpEmail=By.xpath("//*[@id='Email']");
     private  By drpRole=By.xpath("//*[@id='UserRoleId']");
     private  By inpTitle=By.xpath("//*[@id='Title']");
+    private  By chkLPPermissions=By.xpath("//input[@name='PermissionCategoryIds']/following-sibling::span");
+    private  By inpVendor=By.xpath("//input[@type='search']");
     private  By inpStatus=By.xpath("//*[@id='StatusMessage']");
     private By alert=By.xpath("//div[text()='User Successfully Updated.']");
 
@@ -59,17 +66,39 @@ public class UserPage extends UIAction {
 
     public void addOCSUserDetails(String userType){
         generateUserData();
-        waitForVisibilityOfElement(drpUserType);
-        selectDropDown(drpUserType,userType);
-        waitForPageToLoad();
+        if(userType.toLowerCase().equals("ocs")) {
+            waitForVisibilityOfElement(drpUserType);
+            selectDropDown(drpUserType, userType);
+            waitForPageToLoad();
+            setText(inpStatus, RandomUtil.getRandomString(10));
+            selectDropDown(drpRole);
+        }
+        else {
+            waitForVisibilityOfElement(drpUserType);
+            selectDropDown(drpUserType, userType);
+            waitForPageToLoad();
+            setText(inpTitle,RandomUtil.getRandomString(10));
+            selectVendorNumber();
+            clickUsingAction(chkLPPermissions);
+        }
         setText(inpFirstName, config.getFirstName());
         setText(inpLastName, config.getLastName());
         setText(inpPhoneNumber, config.getContactNumber());
-        String tempEmail= RandomUtil.getRandomAlpahumeric(5);
-        config.setEmail(tempEmail+"@mailinator.com");
-        setText(inpEmail,config.getEmail());
-        setText(inpStatus,RandomUtil.getRandomString(10));
-        selectDropDown(drpRole);
+        String tempEmail = RandomUtil.getRandomAlpahumeric(5);
+        config.setEmail(tempEmail + "@mailinator.com");
+        setText(inpEmail, config.getEmail());
+    }
+
+    public void selectVendorNumber(){
+        By drpVendor=DIV_TEXT.setValue(LABEL_VENDOR_NUMBER).getLocator();
+        click(drpVendor);
+        By vendorList=DropDownVal.getLocator();
+        List<WebElement> elements=findElements(vendorList);
+        int size=elements.size();
+        int act=RandomUtil.getRandomNumberFrom(size);
+        config.setVendorName(elements.get(act).getText());
+        setText(inpVendor,config.getVendorName());
+        click(vendorList);
     }
 
     public void addLicenseProducerUser(String userType){

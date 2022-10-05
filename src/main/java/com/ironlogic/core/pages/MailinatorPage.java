@@ -21,6 +21,7 @@ public class MailinatorPage extends UIAction {
 
    private  By inpSearch=By.xpath("//*[@id='search']");
    private  By btnStartRegistration=By.xpath("//a[text()='START REGISTRATION']");
+   private  By emailBody=By.xpath("//td[text()[contains(normalize-space(),'Your Account has been Created')] and not(contains(@style,'hidden'))]");
    private  By iframeBody=By.xpath("//*[@id='html_msg_body']");
 
 
@@ -54,6 +55,12 @@ public class MailinatorPage extends UIAction {
         click(email);
     }
 
+    public void verifyNewEmailRecievedForLicencedProducer() {
+        By email=Email_Header.setValue(EMAIL_SUBJECT_BODY).getLocator();
+        verifyElementDisplayed(email,"verify the text displayed"+EMAIL_SUBJECT_BODY);
+        click(email);
+    }
+
     public void clickOnNewEmailReceived() {
         By email=Email_Header.setValue(EMAIL_SUBJECT.toString()).getLocator();
         click(email);
@@ -73,8 +80,20 @@ public class MailinatorPage extends UIAction {
         click(btnLogin);
     }
 
+
+    public void verifyEmailRecivedForLicensedProducer() {
+        switchToIframe(iframeBody);
+        verifyElementDisplayed(emailBody,"Verify email received");
+        By btnLogin=HYPERLINK_BUTTON.setValue(BTN_CREATE_PWD).getLocator();
+        click(btnLogin);
+    }
+
     public void verifyNewTabDisplayed(){
         verifyNewTabDisplayedWithSignIn(HDR_SIGNIN_TO_YOUR_ACCOUNT.toString());
+    }
+
+    public void verifyNewTabDisplayedForLicenseProducer(){
+        verifyNewTabDisplayedWithSignIn(CREATE_ACCOUNT_TITLE.toString());
     }
 
 

@@ -32,6 +32,13 @@ public class LoginPageSteps {
         loginPage.enterCredentials();
     }
 
+    @Given("I enter random generated credentials")
+    public void i_enterRandomGeneratedCredentails() {
+        loginPage.enterRandomGeneratedCredentials();
+    }
+
+
+
     @Given("I enter retail credentials")
     public void i_enter_retailt_credentails() {
         loginPage.enterRetailCredentials();

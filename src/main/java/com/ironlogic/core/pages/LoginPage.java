@@ -48,6 +48,14 @@ public class LoginPage extends UIAction {
         logger.info("completed : enterCredentials");
     }
 
+    public void enterRandomGeneratedCredentials(){
+        logger.info("started : enterCredentials");
+        waitForVisibilityOfElement(inpEmail);
+        setText(inpEmail,config.getEmail());
+        setText(inpPassword,config.getPassword());
+        logger.info("completed : enterCredentials");
+    }
+
     public void enterRetailCredentials(DataTable dt){
         logger.info("started : enterCredentials");
         String retailrUser=config.getOrder_data().getUserid();

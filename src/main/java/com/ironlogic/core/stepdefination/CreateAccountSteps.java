@@ -23,9 +23,19 @@ public class CreateAccountSteps {
         createAccountPage.addCreateAccountDetails();
     }
 
+    @And("I create new password")
+    public void iCreateNewPwd() {
+        createAccountPage.addPassword();
+    }
+
     @And("I click on confirm password button")
     public void iClickOnConfirmPasswordButton() {
         createAccountPage.clickOnConfirmPassword();
+    }
+
+    @And("I click on confirm password")
+    public void iClickOnConfirmPasswordButton1() {
+        createAccountPage.clickOnConfirmPassword1();
     }
 
     @And("I accept terms and condition and clicks on next step")

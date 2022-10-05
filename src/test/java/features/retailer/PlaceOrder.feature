@@ -18,6 +18,3 @@ Feature: Invite retailer and add all the information
       | retailusers|
       | user1 |
       | user2 |
-
-
-
