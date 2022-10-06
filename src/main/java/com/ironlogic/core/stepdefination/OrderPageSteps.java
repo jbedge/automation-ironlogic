@@ -27,19 +27,19 @@ public class OrderPageSteps {
 
     @Then("I add stock SKU")
     public void addStockSKU() {
-        ArrayList<String> stockSKU=config.getOrder_data().getStockSKU();
-        for (String order:stockSKU){
-            String[] skuqty=order.split("\\|");
-            orderPage.placeOrderForStockSKu(skuqty[0],Integer.parseInt(skuqty[1]));
+        ArrayList<String> stockSKU = config.getOrder_data().getStockSKU();
+        for (String order : stockSKU) {
+            String[] skuqty = order.split("\\|");
+            orderPage.placeOrderForStockSKu(skuqty[0], Integer.parseInt(skuqty[1]));
         }
     }
 
     @Then("I add flow through SKU")
     public void addFlowSKU() {
-        ArrayList<String> stockSKU=config.getOrder_data().getFlowThroghSKU();
-        for (String order:stockSKU) {
+        ArrayList<String> stockSKU = config.getOrder_data().getFlowThroghSKU();
+        for (String order : stockSKU) {
             String[] skuqty = order.split("\\|");
-            orderPage.placeOrderForFlowThroughSKU(skuqty[0],Integer.parseInt(skuqty[1]));
+            orderPage.placeOrderForFlowThroughSKU(skuqty[0], Integer.parseInt(skuqty[1]));
         }
     }
 
@@ -58,4 +58,28 @@ public class OrderPageSteps {
     public void iVerifyTheOrderSubmitMessage() {
         orderPage.verifyOrderSubmission();
     }
+
+    @Then("I verify the order history for flow through")
+    public void iverifytheorderhistoryforflowthrough() {
+        ArrayList<String> stockSKU = config.getOrder_data().getFlowThroghSKU();
+        for (String order : stockSKU) {
+            String[] skuqty = order.split("\\|");
+            orderPage.clickOnOrderHistoryAndVerifyFlowThroughSKU(skuqty[0], skuqty[1]);
+        }
+    }
+
+    @Then("I click on order history")
+    public void iclickOnOrderHistory() {
+        orderPage.clickOnOrderHistory();
+    }
+
+    @Then("I verify the order history for Replenishment")
+    public void iverifytheorderhistoryforReplenishment() {
+        ArrayList<String> stockSKU = config.getOrder_data().getFlowThroghSKU();
+        for (String order : stockSKU) {
+            String[] skuqty = order.split("\\|");
+            orderPage.clickOnOrderHistoryAndVerifyReplenishmentSKU(skuqty[0], skuqty[1]);
+        }
+    }
+
 }

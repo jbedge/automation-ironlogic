@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -237,6 +238,17 @@ public class UIAction implements Action {
     public void verifyElementDisplayed(By loc, String log) {
         waitForVisibilityOfElement(loc);
         testConfiguration.getScenario().log(log);
+    }
+
+    public void assertTrue(boolean isDisplayed,String msg){
+        try {
+            Assert.assertTrue(isDisplayed);
+            testConfiguration.getScenario().log(msg);
+        }
+        catch (Exception e){
+            testConfiguration.getScenario().log(e.toString());
+        }
+
     }
 
 

@@ -32,7 +32,10 @@ public class OrderPage extends UIAction {
     private By hdrFlowThroughOrder=By.xpath("//a[contains(text(),'Flow-Through Order')]");
     private By btnSubmitOrder=By.xpath("//*[@id=\"SubmitOrder\"]");
     private By confirmYes=By.xpath("//*[@id=\"modalConfirm\"]//*[@id=\"btnOkConfirm\"]");
-
+    private By orderIDFlowThrough=By.xpath("(//*[@id='userList']//td[1]/a)[1]");
+    private By orderIDReplenishment=By.xpath("(//*[@id='userList']//td[1]/a)[2]");
+    private By orderID=By.xpath("//span[normalize-space()='ORDER ID:']/following-sibling::span");
+    private By orderMenuDropDown=By.xpath("//*[@id='dropdownMenuButton']");
 
     public OrderPage(TestContext testContext) {
         super(testContext);
@@ -134,6 +137,43 @@ public class OrderPage extends UIAction {
         By loc2=SPAN_TEXT.setValue(MSG_ORDER_SUBMITTED).getLocator();
         verifyElementDisplayed(loc,"verify success message displayed after order submission.");
         verifyElementDisplayed(loc2,"verify success message displayed after order submission.");
+    }
+
+    public void clickOnOrderHistory(){
+        click(orderMenuDropDown);
+        By menuOrderHistory=HYPERLINK_BUTTON.setValue(MENU_ORDER_HISTORY).getLocator();
+        click(menuOrderHistory);
+    }
+
+    public void clickOnOrderHistoryAndVerifyFlowThroughSKU(String sku,String qty){
+        click(orderIDFlowThrough);
+        By hdrOrderDetails=H5_Header.setValue(HDR_ORDER_DETAILS).getLocator();
+        waitForVisibilityOfElement(hdrOrderDetails);
+        By skuLoc=GRID_DATA.setValue(sku).getLocator();
+        By skuQty=GRID_DATA.setValue(qty).getLocator();
+        if(isElementVisible(skuLoc,4)){
+            verifyElementDisplayed(skuLoc,"verified the presence of SKU");
+            verifyElementDisplayed(skuQty,"verified the presence of Quantity");
+            String orderId=waitForVisibilityOfElement(orderID).getText();
+            assertTrue(orderId.length()>0,"Verify the Order ID displayed");
+            By btnClose=BUTTON.setValue(BTN_CLOSE).getLocator();
+            click(btnClose);
+        }
+
+    }
+
+    public void clickOnOrderHistoryAndVerifyReplenishmentSKU(String sku,String qty){
+        click(orderIDReplenishment);
+        By hdrOrderDetails=H5_Header.setValue(HDR_ORDER_DETAILS).getLocator();
+        waitForVisibilityOfElement(hdrOrderDetails);
+        By skuLoc=GRID_DATA.setValue(sku).getLocator();
+        By skuQty=GRID_DATA.setValue(qty).getLocator();
+        if(isElementVisible(skuLoc,6)){
+            verifyElementDisplayed(skuLoc,"verified the presence of SKU");
+            verifyElementDisplayed(skuQty,"verified the presence of Quantity");
+            String orderId=waitForVisibilityOfElement(orderID).getText();
+            assertTrue(orderId.length()>0,"Verify the Order ID displayed");
+        }
     }
 
 }

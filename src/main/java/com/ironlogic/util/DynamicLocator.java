@@ -20,6 +20,7 @@ public enum DynamicLocator {
     OrganizationList("//div[contains(@class,'options')]//div[not(@data-index='0') and @data-index]"),
 //    dont remove backslash in below xpath added intentionaly to overcome signle quote in string
     Email_Header("//td[normalize-space()=\"tempValue\"]"),
+    GRID_DATA("//td[normalize-space()=\"tempValue\"]"),
     BUTTON("//button[normalize-space()='tempValue']"),
     DropDown("//label[normalize-space()='tempValue']//following-sibling::div//div[text()='Select']"),
     INPUT_BUTTON("//input[normalize-space(@value)='tempValue']"),

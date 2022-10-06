@@ -10,7 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
+import java.time.Instant;
 import java.util.List;
 
 import static com.ironlogic.util.DynamicLocator.*;
@@ -29,11 +31,8 @@ public class HomePage extends UIAction {
     private By btnSubmit=By.xpath("//button[text()='Submit']");
     private By successMsg=By.xpath("//h4[text()='Invitation Successfully Sent.']");
     private By inviteUrl=By.xpath("//*[@id='modalSuccess']//a");
-    private By orderMenuDropDown=By.xpath("//*[@id='dropdownMenuButton']");
     private By inpOrganisation=By.xpath("//input[@placeholder='Search for Organizations']");
-    private By orderIDFlowThrough=By.xpath("(//*[@id='userList']//td[1]/a)[1]");
-    private By orderIDReplenishment=By.xpath("(//*[@id='userList']//td[1]/a)[2]");
-    private By orderID=By.xpath("//span[normalize-space()='ORDER ID:']");
+
 
 
 
@@ -88,15 +87,6 @@ public class HomePage extends UIAction {
         click(inviteUrl);
         verifyNewTabDisplayedWithCreateAccountForm();
     }
-
-    public void add(){
-        click(orderMenuDropDown);
-        By menuOrderHistory=HYPERLINK_BUTTON.setValue(MENU_ORDER_HISTORY).getLocator();
-        click(menuOrderHistory);
-        click(orderIDFlowThrough);
-//        SPAN_TEXT.setValue();
-    }
-
 
 
 

@@ -12,6 +12,9 @@ Feature: Invite retailer and add all the information
     And I add flow through SKU
     And I submit the order
     Then I verify the order submit message
+    And I click on order history
+    Then I verify the order history for flow through
+    Then I verify the order history for Replenishment
 
 
     Examples:
