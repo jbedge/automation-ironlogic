@@ -1,10 +1,8 @@
 package com.ironlogic.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.ironlogic.data.Constants;
 import com.ironlogic.data.OrderData;
-import com.jayway.jsonpath.JsonPath;
 import io.cucumber.java.Scenario;
 import lombok.Data;
 import lombok.SneakyThrows;
