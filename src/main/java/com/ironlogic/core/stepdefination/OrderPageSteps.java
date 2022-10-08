@@ -30,7 +30,7 @@ public class OrderPageSteps {
         ArrayList<String> stockSKU = config.getOrder_data().getStockSKU();
         for (String order : stockSKU) {
             String[] skuqty = order.split("\\|");
-            orderPage.placeOrderForStockSKu(skuqty[0], Integer.parseInt(skuqty[1]));
+            orderPage.placeOrderForStockSKu(skuqty[0].split("_")[0], Integer.parseInt(skuqty[1]));
         }
     }
 
@@ -39,7 +39,7 @@ public class OrderPageSteps {
         ArrayList<String> stockSKU = config.getOrder_data().getFlowThroghSKU();
         for (String order : stockSKU) {
             String[] skuqty = order.split("\\|");
-            orderPage.placeOrderForFlowThroughSKU(skuqty[0], Integer.parseInt(skuqty[1]));
+            orderPage.placeOrderForFlowThroughSKU(skuqty[0].split("_")[0], Integer.parseInt(skuqty[1]));
         }
     }
 
@@ -62,10 +62,12 @@ public class OrderPageSteps {
     @Then("I verify the order history for flow through")
     public void iverifytheorderhistoryforflowthrough() {
         ArrayList<String> stockSKU = config.getOrder_data().getFlowThroghSKU();
+        orderPage.clickOnOrderId();
         for (String order : stockSKU) {
             String[] skuqty = order.split("\\|");
             orderPage.clickOnOrderHistoryAndVerifyFlowThroughSKU(skuqty[0], skuqty[1]);
         }
+        orderPage.clickOnClose();
     }
 
     @Then("I click on order history")
@@ -76,10 +78,12 @@ public class OrderPageSteps {
     @Then("I verify the order history for Replenishment")
     public void iverifytheorderhistoryforReplenishment() {
         ArrayList<String> stockSKU = config.getOrder_data().getFlowThroghSKU();
+        orderPage.clickOnOrderIDReplenishment();
         for (String order : stockSKU) {
             String[] skuqty = order.split("\\|");
             orderPage.clickOnOrderHistoryAndVerifyReplenishmentSKU(skuqty[0], skuqty[1]);
         }
+        orderPage.clickOnClose();
     }
 
 }

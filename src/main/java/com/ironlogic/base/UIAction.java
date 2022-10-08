@@ -186,6 +186,7 @@ public class UIAction implements Action {
 
     public boolean isElementVisible(By loc, long timeoutInSec) {
         try {
+            clearImplicitWait(driver);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSec), Duration.ofSeconds(Constants.POLL_TIME));
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(loc));
             setElement(element);
@@ -193,6 +194,17 @@ public class UIAction implements Action {
         } catch (TimeoutException e) {
             return false;
         }
+        finally {
+            resetImplicitWait(driver);
+        }
+    }
+
+    public void clearImplicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+    }
+
+    public void resetImplicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
     }
 
     WebElement popup;
@@ -238,6 +250,10 @@ public class UIAction implements Action {
     public void verifyElementDisplayed(By loc, String log) {
         waitForVisibilityOfElement(loc);
         testConfiguration.getScenario().log(log);
+    }
+
+    public void verifyElementDisplayed1(By loc, String log) {
+        waitForVisibilityOfElement(loc);
     }
 
     public void assertTrue(boolean isDisplayed,String msg){
@@ -425,6 +441,25 @@ public class UIAction implements Action {
         }).start();
         System.out.println("5.....");
     }
+
+//    public void verifyPopUp1(){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    getJs().executeScript("function myFunc() {\n" +
+//                            "  var popup=document.querySelector(\"#ip-no\");\n" +
+//                            "  if (popup ==null) {\n" +
+//                            "  } else {\n" +
+//                            "    popup.click();\n" +
+//                            "  }\n" +
+//                            "};\n" +
+//                            "myFunc();");
+//                }
+//            }
+//        }).start();
+//        System.out.println("5.....");
+//    }
 
     private By popupYes=By.xpath("//*[@id=\"ip-no\"]");
     private By iframe=By.xpath("//*[@id=\"iPerceptionsFrame\"]");

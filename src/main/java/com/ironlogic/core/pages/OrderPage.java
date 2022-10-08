@@ -26,6 +26,8 @@ public class OrderPage extends UIAction {
     Logger logger = LoggerFactory.getLogger(TestConfiguration.class);
 
     private By inpSearchProductOrSKU=By.xpath("//*[@id=\"txtSearch\"]");
+    private By maxQty=By.xpath("//span[@id='maxQty' and text()>0]");
+    private By inpOrderQty=By.xpath("//*[@id='divProdList']//input[@class='Qty']");
 //    private By btnAddToCart=By.xpath("//*[@id='btnAddToCart']");
     private By btnCartWithItem=By.xpath("//*[@id=\"btnCartWithItemCount\" and ./span[text()>0]]");
     private By btnCheckOut=By.xpath("//*[@id=\"submitOrderButton\"]");
@@ -60,12 +62,26 @@ public class OrderPage extends UIAction {
         verifyElementDisplayed(loc,"Verify header displayed "+BTN_CONTINUE_ORDER);
     }
 
+    public void verifyOrderPageDisplayed1() {
+        verifyPopUp();
+        By loc=BTN_CONTINUE_OR_PLACE_ORDER.setValues(BTN_CONTINUE_ORDER.toString(),BTN_PLACE_AN_ORDER.toString()).getLocator();
+        verifyElementDisplayed1(loc,"Verify header displayed "+BTN_CONTINUE_ORDER);
+    }
+
     public void clickOnOrderPage() {
         By btnplaceOrder = BTN_CONTINUE_OR_PLACE_ORDER.setValues(BTN_CONTINUE_ORDER.toString(),BTN_PLACE_AN_ORDER.toString()).getLocator();
         By btnViewAllProducts = HYPERLINK_BUTTON.setValue(BTN_VIEW_ALL_PRODUCTS).getLocator();
         click(btnplaceOrder);
         waitForPageToLoad();
         verifyElementDisplayed(btnViewAllProducts, "Verify header displayed " + BTN_VIEW_ALL_PRODUCTS);
+    }
+
+    public void clickOnOrderPage1() {
+        By btnplaceOrder = BTN_CONTINUE_OR_PLACE_ORDER.setValues(BTN_CONTINUE_ORDER.toString(),BTN_PLACE_AN_ORDER.toString()).getLocator();
+        By btnViewAllProducts = HYPERLINK_BUTTON.setValue(BTN_VIEW_ALL_PRODUCTS).getLocator();
+        click(btnplaceOrder);
+        waitForPageToLoad();
+        verifyElementDisplayed1(btnViewAllProducts, "Verify header displayed " + BTN_VIEW_ALL_PRODUCTS);
     }
 
     public void placeOrderForStockSKu(String sku,int quantity) {
@@ -83,6 +99,21 @@ public class OrderPage extends UIAction {
         verifyElementDisplayed(msg,"Verify header displayed "+MSG_PRODUCT_ADDED);
     }
 
+    public void placeOrderForStockSKu1(String sku,int quantity) {
+        By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
+        By msg = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
+        By plusIcon=OrderQuantity.setValue(sku).getLocator();
+        By btnAddToCart=AddToCart.setValue(sku).getLocator();
+
+        clickUsingJS(clear);
+        clearText(inpSearchProductOrSKU);
+        setText(inpSearchProductOrSKU,sku);
+        WebElement element=waitForVisibilityOfElement(plusIcon);
+        addQuantity(element,quantity);
+        click(btnAddToCart);
+        verifyElementDisplayed1(msg,"Verify header displayed "+MSG_PRODUCT_ADDED);
+    }
+
     public void placeOrderForFlowThroughSKU(String sku,int quantity) {
         By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
         By plusIcon=OrderQuantity.setValue(sku).getLocator();
@@ -93,15 +124,39 @@ public class OrderPage extends UIAction {
 
         clickUsingJS(clear);
         clearText(inpSearchProductOrSKU);
-        setText(inpSearchProductOrSKU,sku);
+        setText(inpSearchProductOrSKU,sku.trim());
         WebElement element=waitForVisibilityOfElement(plusIcon);
         addQuantity(element,quantity);
         click(btnAddToCart);
         verifyElementDisplayed(msg,"Verify header displayed "+MSG_PRODUCT_ADDED);
     }
 
+    public void placeOrderForFlowThroughSKU1(String sku,int quantity) {
+        By clear = HYPERLINK_BUTTON.setValue(BTN_CLEAR_FILTERS).getLocator();
+        By plusIcon=OrderQuantity.setValue(sku).getLocator();
+        By msg = SPAN_TEXT.setValue(MSG_PRODUCT_ADDED).getLocator();
+        By btnAddToCart=AddToCart.setValue(sku).getLocator();
+
+        clickUsingJS(clear);
+        clearText(inpSearchProductOrSKU);
+        setText(inpSearchProductOrSKU,sku);
+        WebElement element=waitForVisibilityOfElement(plusIcon);
+        addQuantity(element,quantity);
+        click(btnAddToCart);
+        verifyElementDisplayed1(msg,"Verify header displayed "+MSG_PRODUCT_ADDED);
+    }
+
     public void addQuantity(WebElement element,int quanity){
-        IntStream.range(1,quanity).forEach(i->element.click());
+        String qty=waitForVisibilityOfElement(inpOrderQty).getAttribute("value");
+        if(isElementVisible(maxQty,4)){
+            String actualQty=getElement().getText();
+            clearText(inpOrderQty);
+            setText(inpOrderQty,actualQty);
+        }
+        else {
+            IntStream.range(1,quanity).forEach(i->element.click());
+        }
+
     }
 
     public void clearMyCart(){
@@ -116,6 +171,22 @@ public class OrderPage extends UIAction {
         }
         else {
             clickOnOrderPage();
+        }
+
+    }
+
+    public void clearMyCart1(){
+        By btnViewMyOrder=BUTTON.setValue(BTN_VIEW_MYORDER).getLocator();
+        By btnClearOrder=SPAN_TEXT.setValue(BTN_CLEAR_ORDER).getLocator();
+        if(isElementVisible(btnCartWithItem,10)){
+            getElement().click();
+            click(btnViewMyOrder);
+            click(btnClearOrder);
+            click(confirmYes);
+            waitForPageToLoad();
+        }
+        else {
+            clickOnOrderPage1();
         }
 
     }
@@ -139,14 +210,33 @@ public class OrderPage extends UIAction {
         verifyElementDisplayed(loc2,"verify success message displayed after order submission.");
     }
 
+    public void verifyOrderSubmission1(){
+        By loc=DIV_TEXT.setValue(MSG_SUBMIT_ORDER).getLocator();
+        By loc2=SPAN_TEXT.setValue(MSG_ORDER_SUBMITTED).getLocator();
+        verifyElementDisplayed1(loc,"verify success message displayed after order submission.");
+        verifyElementDisplayed1(loc2,"verify success message displayed after order submission.");
+    }
+
     public void clickOnOrderHistory(){
         click(orderMenuDropDown);
         By menuOrderHistory=HYPERLINK_BUTTON.setValue(MENU_ORDER_HISTORY).getLocator();
         click(menuOrderHistory);
     }
 
-    public void clickOnOrderHistoryAndVerifyFlowThroughSKU(String sku,String qty){
+    public void clickOnOrderId(){
         click(orderIDFlowThrough);
+    }
+
+    public void clickOnOrderIDReplenishment(){
+        click(orderIDReplenishment);
+    }
+
+    public void clickOnClose(){
+        By btnClose=BUTTON.setValue(BTN_CLOSE).getLocator();
+        click(btnClose);
+    }
+
+    public void clickOnOrderHistoryAndVerifyFlowThroughSKU(String sku,String qty){
         By hdrOrderDetails=H5_Header.setValue(HDR_ORDER_DETAILS).getLocator();
         waitForVisibilityOfElement(hdrOrderDetails);
         By skuLoc=GRID_DATA.setValue(sku).getLocator();
@@ -156,14 +246,12 @@ public class OrderPage extends UIAction {
             verifyElementDisplayed(skuQty,"verified the presence of Quantity");
             String orderId=waitForVisibilityOfElement(orderID).getText();
             assertTrue(orderId.length()>0,"Verify the Order ID displayed");
-            By btnClose=BUTTON.setValue(BTN_CLOSE).getLocator();
-            click(btnClose);
         }
 
     }
 
     public void clickOnOrderHistoryAndVerifyReplenishmentSKU(String sku,String qty){
-        click(orderIDReplenishment);
+
         By hdrOrderDetails=H5_Header.setValue(HDR_ORDER_DETAILS).getLocator();
         waitForVisibilityOfElement(hdrOrderDetails);
         By skuLoc=GRID_DATA.setValue(sku).getLocator();

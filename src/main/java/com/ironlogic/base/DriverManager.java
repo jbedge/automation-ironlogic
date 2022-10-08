@@ -55,7 +55,7 @@ public class DriverManager {
                 writeFile(session_details,debugPort);
                 driver=(WebDriver)chromeDriver;
                 driver.manage().deleteAllCookies();
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
+                setImplicitWait(driver);
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.PAGE_TIME));
                 break;
             case "debugchrome":
@@ -65,12 +65,18 @@ public class DriverManager {
                 options1.setExperimentalOption("debuggerAddress",port);
                 chromeDriver=new ChromeDriver(options1);
                 driver=(WebDriver)chromeDriver;
-                chromeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
-                chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.PAGE_TIME));
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
+                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.PAGE_TIME));
                 break;
         }
         return driver;
     }
+
+    public void setImplicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
+    }
+
+
 
     public void quitDriver() {
         driver.quit();
