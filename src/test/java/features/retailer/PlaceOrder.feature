@@ -1,10 +1,25 @@
 Feature: Invite retailer and add all the information
 
+  Scenario Outline: Ordering Configuration
+    Given I launch the URL
+    And I enter admin credentials
+    And I click on login button
+    Then I verify home page displayed
+    And I select hamburger "<menu>" and "<submenu>"
+    Then I setup order configuration
+      | 3123,9234 |
+
+    Examples:
+      | menu             | submenu                |
+      | Order Management | Ordering Configuration |
+
+
+
   @PlaceOrder
   Scenario Outline: login to the website and verify the homepage
     Given I launch the URL
     And I enter retail credentials from data file
-    |<retailusers>|
+      | <retailusers> |
     And I click on login button
     Then I verify order page displayed
     And I clear my cart
@@ -18,6 +33,6 @@ Feature: Invite retailer and add all the information
 
 
     Examples:
-      | retailusers|
-      | user1 |
-      | user2 |
+      | retailusers |
+      | user1       |
+      | user2       |

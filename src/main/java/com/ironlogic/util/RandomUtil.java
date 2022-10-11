@@ -4,6 +4,9 @@ import com.ironlogic.base.TestConfiguration;
 import com.opencsv.CSVWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
@@ -112,7 +115,14 @@ public class RandomUtil {
         }
     }
 
-
+    public static String getDayOfTheWeek(){
+        DateFormatSymbols dfs = new DateFormatSymbols(Locale.getDefault());
+        String weekdays[] = dfs.getWeekdays();
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        String nameOfDay = weekdays[day];
+        return nameOfDay;
+    }
 
 
 }

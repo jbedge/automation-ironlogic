@@ -9,6 +9,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import java.util.List;
+
 public class UserPageSteps {
 
     private UserPage userPage;
@@ -37,5 +39,11 @@ public class UserPageSteps {
     @And("I verify success message")
     public void iverifySuccessMessage() {
         userPage.verifySuccessMessage();
+    }
+
+    @Then("I setup order configuration")
+    public void iSetupOrderConfiguration(DataTable dataTable) {
+        String[] list=dataTable.asList().get(0).split(",");
+        userPage.addOrderCongiguring(list);
     }
 }

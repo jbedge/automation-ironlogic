@@ -5,11 +5,16 @@ import org.openqa.selenium.By;
 public enum DynamicLocator {
 
     HamBurgerMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
+    toggleButton("//tr[./td[contains(text(),'tempValue')]]//span[text()='Yes' and not(contains(@class,'color-green'))]"),
+    toggleButton1("//tr[./td[contains(text(),'tempValue')]]/following-sibling::tr[@id][1]//span[text()='Yes' and not(contains(@class,'color-green'))]"),
+    inpStoreName("//tr[./td[contains(text(),'tempValue')]]//input[normalize-space(@title)='Type Store Name/Store ID/Organization' and not(@disabled)]"),
+    inpStoreName1("//tr[./td[contains(text(),'tempValue')]]/following-sibling::tr[@id][1]//input[normalize-space(@title)='Type Store Name/Store ID/Organization' and not(@disabled)]"),
+    DRP_RETAILERS("//li[contains(@class,'ui-menu-item')]//div[contains(text(),'tempValue')]"),
     HamBurgerSubMenu("//div[contains(@class,'sidenav')]//a[normalize-space()='tempValue']"),
     OrderQuantity("//*[@id='divProdList']//div[@class='product-lists-pra' and .//p[contains(text(),'tempValue')]]//img[contains(@src,'plus')]"),
     AddToCart("//*[@id='divProdList']//div[@class='product-lists-pra' and .//p[contains(text(),'tempValue')]]//*[@id='btnAddToCart']"),
 
-    H5_Header("//h5[normalize-space()='tempValue']"),
+    H5_Header("//h5[contains(normalize-space(),'tempValue')]"),
     H1_Header("//h1[normalize-space()='tempValue']"),
     H2_Header("//h2[normalize-space(text())='tempValue']"),
     H4_Header("//h4[normalize-space()='tempValue']"),

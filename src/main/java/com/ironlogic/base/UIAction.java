@@ -184,6 +184,20 @@ public class UIAction implements Action {
         }
     }
 
+    public boolean isElementPresence(By loc, long timeoutInSec) {
+        try {
+            clearImplicitWait(driver);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSec), Duration.ofSeconds(Constants.POLL_TIME));
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(loc));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+        finally {
+            resetImplicitWait(driver);
+        }
+    }
+
     public boolean isElementVisible(By loc, long timeoutInSec) {
         try {
             clearImplicitWait(driver);
@@ -273,6 +287,14 @@ public class UIAction implements Action {
         waitForVisibilityOfElement(loc).click();
     }
 
+    public void retryClick(By loc) {
+        waitForVisibilityOfElement(loc).click();
+        waitFor(1);
+        if(isElementVisible(loc,6)){
+            click(loc);
+        }
+    }
+
     public void selectCheckBox(By loc) {
         WebElement element=waitForVisibilityOfElement(loc);
         if(!element.isSelected()){
@@ -293,6 +315,21 @@ public class UIAction implements Action {
     public void clickUsingAction(By loc) {
         Actions actions = new Actions(driver);
         actions.moveToElement(waitForVisibilityOfElement(loc)).click().build().perform();
+    }
+
+    public void scrollToElement(By loc) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(waitForVisibilityOfElement(loc)).build().perform();
+    }
+
+    public void scrollElementJS(By loc) {
+        String scrollUp="document.body.scrollTop = document.documentElement.scrollTop = 0;";
+//        getJs().executeScript(scrollUp);
+//        int Y =waitForPresenceOfElement(loc).getLocation().getY();
+//        String script=String.format("window.scrollBy(0,%s)",Y-40);
+//        getJs().executeScript(script);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoViewIfNeeded();", waitForPresenceOfElement(loc));
+        waitFor(1);
     }
 
     public void quitDriver() {

@@ -48,7 +48,8 @@ public class HomePage extends UIAction {
         click(loc);
         waitFor(0.2);
         click(subloc);
-        String hdr=String.format("%s > %s",menu,submenu);
+//        String hdr=String.format("%s > %s",menu,submenu);
+        String hdr=String.format("%s >",menu);
         verifyElementDisplayed(H5_Header.setValue(hdr).getLocator(),"verify the navigation header displayed");
     }
 

@@ -11,9 +11,12 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
-import static com.ironlogic.data.RunTimeData.Drop_Down_Value;
+import static com.ironlogic.util.RandomUtil.*;
 import static com.ironlogic.util.DynamicLocator.*;
 import static com.ironlogic.util.TextMessage.*;
 
@@ -27,6 +30,8 @@ public class UserPage extends UIAction {
     private By drpUserType=By.xpath("//select[@id=\"UserTypeId\"]");
     private  By inpFirstName=By.xpath("//*[@id='FirstName']");
     private  By inpLastName=By.xpath("//*[@id='LastName']");
+//    private  By toggleButton=By.xpath("//tr[./td[contains(text(),'Monday')]]//span[text()='Yes' and not(contains(@class,'color-green'))]");
+//    private  By inpStoreName=By.xpath("//tr[./td[contains(text(),'Monday')]]//input[normalize-space(@title)='Type Store Name/Store ID/Organization']");
     private  By inpPhoneNumber=By.xpath("//*[@id='PhoneNumber']");
     private  By inpEmail=By.xpath("//*[@id='Email']");
     private  By drpRole=By.xpath("//*[@id='UserRoleId']");
@@ -35,6 +40,7 @@ public class UserPage extends UIAction {
     private  By inpVendor=By.xpath("//input[@type='search']");
     private  By inpStatus=By.xpath("//*[@id='StatusMessage']");
     private By alert=By.xpath("//div[text()='User Successfully Updated.']");
+    private By alertClose=By.xpath("//*[@id='modalAlert' and contains(@style,'display: block;')]//button[@class='close']");
 
     public UserPage(TestContext testContext) {
         super(testContext);
@@ -119,6 +125,60 @@ public class UserPage extends UIAction {
     public void clickOnSubmit(){
         By btnSubmit=BUTTON.setValue(BTN_SUBMIT).getLocator();
         click(btnSubmit);
+    }
+
+    public void addOrderCongiguring(String[] retailerIDs){
+        String day=getDayOfTheWeek();
+        By btnToggle=toggleButton.setValue(day).getLocator();
+        By btnToggle1=toggleButton1.setValue(day).getLocator();
+        By inpStoreNameLoc=inpStoreName.setValue(day).getLocator();
+        By inpStoreNameLoc1=inpStoreName1.setValue(day).getLocator();
+
+        if(isElementPresence(btnToggle,12)){
+            scrollElementJS(btnToggle);
+            clickUsingAction(btnToggle);
+        }
+        if(isElementPresence(btnToggle1,12)){
+            scrollElementJS(btnToggle1);
+            clickUsingAction(btnToggle1);
+        }
+        if(isElementVisible(inpStoreNameLoc,10)){
+            for (String retailerID:retailerIDs){
+                scrollToElement(inpStoreNameLoc);
+                clearText(inpStoreNameLoc);
+                setText(inpStoreNameLoc,retailerID);
+                By drpValue=DRP_RETAILERS.setValue(retailerID).getLocator();
+                clickUsingAction(drpValue);
+                waitFor(1);
+                retryClick(alertClose);
+                waitFor(1);
+            }
+        }
+        if(isElementVisible(inpStoreNameLoc1,10)){
+            for (String retailerID:retailerIDs){
+
+                clearText(inpStoreNameLoc1);
+                setText(inpStoreNameLoc1,retailerID);
+                By drpValue=DRP_RETAILERS.setValue(retailerID).getLocator();
+                clickUsingAction(drpValue);
+                waitFor(1);
+                retryClick(alertClose);
+                waitFor(1);
+            }
+        }
+        By btnSave=BUTTON.setValue(BTN_SAVE).getLocator();
+        click(btnSave);
+        waitFor(1);
+        clickUsingAction(alertClose);
+    }
+
+    public static void main(String[] args) {
+        DateFormatSymbols dfs = new DateFormatSymbols(Locale.getDefault());
+        String weekdays[] = dfs.getWeekdays();
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        String nameOfDay = weekdays[day];
+        System.out.println(nameOfDay);
     }
 
 }
