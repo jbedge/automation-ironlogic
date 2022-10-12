@@ -133,13 +133,14 @@ public class UserPage extends UIAction {
         By btnToggle1=toggleButton1.setValue(day).getLocator();
         By inpStoreNameLoc=inpStoreName.setValue(day).getLocator();
         By inpStoreNameLoc1=inpStoreName1.setValue(day).getLocator();
+        By scroll=SCROLL.setValue(day).getLocator();
 
-        if(isElementPresence(btnToggle,12)){
-            scrollElementJS(btnToggle);
+        scrollElementJS(scroll);
+
+        if(isElementPresence(btnToggle,12)&&!(getElement().isEnabled())){
             clickUsingAction(btnToggle);
         }
-        if(isElementPresence(btnToggle1,12)){
-            scrollElementJS(btnToggle1);
+        if(isElementPresence(btnToggle1,12)&&!(getElement().isEnabled())){
             clickUsingAction(btnToggle1);
         }
         if(isElementVisible(inpStoreNameLoc,10)){
@@ -148,7 +149,7 @@ public class UserPage extends UIAction {
                 clearText(inpStoreNameLoc);
                 setText(inpStoreNameLoc,retailerID);
                 By drpValue=DRP_RETAILERS.setValue(retailerID).getLocator();
-                clickUsingAction(drpValue);
+                retryClick(drpValue);
                 waitFor(1);
                 retryClick(alertClose);
                 waitFor(1);
@@ -156,11 +157,10 @@ public class UserPage extends UIAction {
         }
         if(isElementVisible(inpStoreNameLoc1,10)){
             for (String retailerID:retailerIDs){
-
                 clearText(inpStoreNameLoc1);
                 setText(inpStoreNameLoc1,retailerID);
                 By drpValue=DRP_RETAILERS.setValue(retailerID).getLocator();
-                clickUsingAction(drpValue);
+                retryClick(drpValue);
                 waitFor(1);
                 retryClick(alertClose);
                 waitFor(1);

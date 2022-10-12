@@ -189,6 +189,7 @@ public class UIAction implements Action {
             clearImplicitWait(driver);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSec), Duration.ofSeconds(Constants.POLL_TIME));
             WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(loc));
+            setElement(element);
             return true;
         } catch (TimeoutException e) {
             return false;
