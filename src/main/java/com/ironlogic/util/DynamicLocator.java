@@ -27,18 +27,22 @@ public enum DynamicLocator {
 //    dont remove backslash in below xpath added intentionaly to overcome signle quote in string
     Email_Header("//td[normalize-space()=\"tempValue\"]"),
     GRID_DATA("//td[normalize-space()=\"tempValue\"]"),
+    Assign_Role("//tr[./td[normalize-space()='tempValue']]//span[contains(@class,'checkbox')]"),
     BUTTON("//button[normalize-space()='tempValue']"),
     DropDown("//label[normalize-space()='tempValue']//following-sibling::div//div[text()='Select']"),
     INPUT_BUTTON("//input[normalize-space(@value)='tempValue']"),
     LABEL_TEXT("//*[@id='successTitle']/label[normalize-space()='tempValue']"),
     SPAN_TEXT("//span[normalize-space()='tempValue']"),
-
+    PERMISSION_CATEGORYs("//div[@onclick and normalize-space()='tempValue']//preceding-sibling::label"),
     HYPERLINK_BUTTON("//a[normalize-space()='tempValue']"),
+    DIV_CATEGORIES("//form//a[normalize-space()='tempValue']"),
 
     BTN_CONTINUE_OR_PLACE_ORDER("//a[normalize-space()='<tempValue0>' or normalize-space()='<tempValue1>']"),
     DAY_OPEN_FROM("//tr[.//label[text()='tempValue']]//*[@id='Opening']"),
     DAY_CLOSE_TO("//tr[.//label[text()='tempValue']]//*[@id='Closing']"),
     ONBOARDING_PROCESS("//li[./b[normalize-space()='<tempValue0>'] and ./span[normalize-space()='<tempValue1>'] and ./span[normalize-space()='<tempValue2>']]"),
+    EDIT_ROLE("//tr[.//li[normalize-space()='tempValue']]//a[contains(@href,'EditRole')]"),
+    DELETE_ROLE("//tr[.//li[normalize-space()='xwjoax']]//a[contains(@onclick,'Delete')]"),
     ;
 
 

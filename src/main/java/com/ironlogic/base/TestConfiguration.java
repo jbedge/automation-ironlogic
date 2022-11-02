@@ -80,6 +80,7 @@ public class TestConfiguration {
     private String CROLContactNumber;
     private String RetailUser1;
     private String RetailUser2;
+    private String RoleName;
 
     @SneakyThrows
     private TestConfiguration()  {

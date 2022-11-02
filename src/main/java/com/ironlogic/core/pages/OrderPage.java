@@ -243,7 +243,7 @@ public class OrderPage extends UIAction {
         By skuQty=GRID_DATA.setValue(qty).getLocator();
         if(isElementVisible(skuLoc,4)){
             verifyElementDisplayed(skuLoc,"verified the presence of SKU");
-            verifyElementDisplayed(skuQty,"verified the presence of Quantity");
+//            verifyElementDisplayed(skuQty,"verified the presence of Quantity");
             String orderId=waitForVisibilityOfElement(orderID).getText();
             assertTrue(orderId.length()>0,"Verify the Order ID displayed");
         }
@@ -258,7 +258,7 @@ public class OrderPage extends UIAction {
         By skuQty=GRID_DATA.setValue(qty).getLocator();
         if(isElementVisible(skuLoc,6)){
             verifyElementDisplayed(skuLoc,"verified the presence of SKU");
-            verifyElementDisplayed(skuQty,"verified the presence of Quantity");
+//            verifyElementDisplayed(skuQty,"verified the presence of Quantity");
             String orderId=waitForVisibilityOfElement(orderID).getText();
             assertTrue(orderId.length()>0,"Verify the Order ID displayed");
         }

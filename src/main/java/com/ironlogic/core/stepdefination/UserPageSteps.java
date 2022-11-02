@@ -31,6 +31,11 @@ public class UserPageSteps {
         userPage.clickOnNewUser();
     }
 
+    @Then("I click on new role button")
+    public void i_click_on_new_role_button() {
+        userPage.clickOnNewRole();
+    }
+
     @And("I add {string} user details")
     public void iAddUserDetails(String arg0) {
         userPage.addOCSUserDetails(arg0);

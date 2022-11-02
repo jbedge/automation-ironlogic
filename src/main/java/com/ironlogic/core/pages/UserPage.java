@@ -63,6 +63,11 @@ public class UserPage extends UIAction {
         click(btnNewUser);
     }
 
+    public void clickOnNewRole(){
+        By btnNewUser=HYPERLINK_BUTTON.setValue(BTN_NEW_ROLE).getLocator();
+        click(btnNewUser);
+    }
+
     public void generateUserData(){
         config.setFirstName(RandomUtil.getRandomString(5));
         config.setLastName(RandomUtil.getRandomString(5));

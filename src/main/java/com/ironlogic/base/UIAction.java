@@ -333,6 +333,16 @@ public class UIAction implements Action {
         waitFor(1);
     }
 
+    public void scrollWindow(By loc) {
+        String scrollUp="document.body.scrollTop = document.documentElement.scrollTop = 0;";
+        getJs().executeScript(scrollUp);
+        int Y =waitForPresenceOfElement(loc).getLocation().getY();
+        String script=String.format("window.scrollBy(0,%s)",Y);
+        getJs().executeScript(script);
+        waitFor(1);
+    }
+
+
     public void quitDriver() {
         driver.quit();
     }
