@@ -91,7 +91,9 @@ public class CreateRolePage extends UIAction {
    }
 
     public void deleteRole(){
+        clearText(inpSearchByRule);
         setText(inpSearchByRule,config.getRoleName());
+        waitFor(1);
         By deleteIcon=DELETE_ROLE.setValue(config.getRoleName()).getLocator();
         click(deleteIcon);
         verifyElementDisplayed(msgConfirmPopUp,"Verify edit header displayed.");

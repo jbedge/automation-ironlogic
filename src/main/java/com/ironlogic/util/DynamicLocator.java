@@ -42,7 +42,7 @@ public enum DynamicLocator {
     DAY_CLOSE_TO("//tr[.//label[text()='tempValue']]//*[@id='Closing']"),
     ONBOARDING_PROCESS("//li[./b[normalize-space()='<tempValue0>'] and ./span[normalize-space()='<tempValue1>'] and ./span[normalize-space()='<tempValue2>']]"),
     EDIT_ROLE("//tr[.//li[normalize-space()='tempValue']]//a[contains(@href,'EditRole')]"),
-    DELETE_ROLE("//tr[.//li[normalize-space()='xwjoax']]//a[contains(@onclick,'Delete')]"),
+    DELETE_ROLE("//tr[.//li[normalize-space()='tempValue']]//a[contains(@onclick,'Delete')]"),
     ;
 
 
