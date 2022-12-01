@@ -29,8 +29,8 @@ import java.util.List;
         glue = {"com.ironlogic.core.stepdefination","com.ironlogic.base"},
         plugin = { "pretty", "json:target/cucumberDefault.json","rerun:target/rerun.txt"},
         monochrome = true,
-        dryRun = false
-//        tags = "@unitcases"
+        dryRun = false,
+        tags = "@createretailer"
 )
 public class RunnerTest extends AbstractTestNGCucumberTests {
     Logger logger = LoggerFactory.getLogger(TestConfiguration.class);

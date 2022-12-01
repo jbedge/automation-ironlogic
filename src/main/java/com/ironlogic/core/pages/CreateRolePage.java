@@ -69,7 +69,7 @@ public class CreateRolePage extends UIAction {
        String email=waitForVisibilityOfElement(userEmail).getText();
        config.setEmail(email);
        setText(inpNameOrEmail,config.getEmail());
-       waitFor(1);
+       waitFor(0.5);
        By user=Assign_Role.setValue(config.getEmail()).getLocator();
        click(user);
        By btnCreateRole=BUTTON.setValue(BTN_CREATE_ROLE).getLocator();

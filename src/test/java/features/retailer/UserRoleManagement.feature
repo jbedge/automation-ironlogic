@@ -1,5 +1,6 @@
 Feature: Create OCS and License Producer Users
 
+  @role
   Scenario Outline: Create OCS user details
     Given I launch the URL
     And I enter admin credentials
