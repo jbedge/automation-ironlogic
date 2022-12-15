@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 public class UIElement {
 
+
     private By element;
 
     public UILocatorType getLocatorType() {
